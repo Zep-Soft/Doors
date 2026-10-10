@@ -598,6 +598,7 @@ BladeBall.UICorner_15.CornerRadius = UDim.new(0, 8)
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
@@ -607,6 +608,10 @@ local espEnabled = false
 local apEnabled = false
 local asEnabled = false
 local espCache = {}
+local lastParry = 0
+
+local Remotes = ReplicatedStorage:FindFirstChild("Remotes")
+local ParryRemote = Remotes and Remotes:FindFirstChild("ParryButtonPress")
 
 local function getHRP(char)
 	return char and char:FindFirstChild("HumanoidRootPart")
@@ -617,7 +622,7 @@ local function setToggleVisual(btn, state)
 	btn.BackgroundColor3 = state and BTN_ON_COLOR or BTN_OFF_COLOR
 end
 
--- ESP players
+-- ================== ESP PLAYERS ==================
 local function createESPForPlayer(plr)
 	if not plr.Character or espCache[plr] then return end
 	local char = plr.Character
@@ -718,38 +723,88 @@ task.spawn(function()
 	end
 end)
 
--- Auto Parry
-local function findBall()
-	for _, obj in ipairs(workspace:GetDescendants()) do
-		if obj.Name == "Ball" and obj:IsA("BasePart") then
-			return obj
+-- ================== AUTO PARRY (mobile) ==================
+local function GetRealBall()
+	local ballsFolder = workspace:FindFirstChild("Balls")
+	if not ballsFolder then return nil end
+	for _, ball in ipairs(ballsFolder:GetChildren()) do
+		if ball:GetAttribute("realBall") then
+			return ball
 		end
 	end
 	return nil
 end
 
-local function isBallTargetingMe(ball)
+RunService.PreSimulation:Connect(function()
+	if not apEnabled or not ParryRemote then return end
+
 	local char = player.Character
 	local hrp = getHRP(char)
-	if not hrp then return false end
-	local dir = (hrp.Position - ball.Position).Unit
-	local vel = ball.AssemblyLinearVelocity
-	if vel.Magnitude < 1 then return false end
-	local dot = dir:Dot(vel.Unit)
-	return dot > 0.7
-end
+	if not hrp then return end
 
+	local ball = GetRealBall()
+	if not ball then return end
+
+	local target = ball:GetAttribute("target")
+	if target ~= player.Name then return end
+
+	local zoomies = ball:FindFirstChild("zoomies")
+	if not zoomies or not zoomies:IsA("LinearVelocity") then return end
+
+	local speed = zoomies.VectorVelocity.Magnitude
+	local distance = (ball.Position - hrp.Position).Magnitude
+
+	if distance <= 12 and speed > 0 then
+		local now = tick()
+		if now - lastParry >= 0.1 then
+			lastParry = now
+			pcall(function()
+				ParryRemote:FireServer()
+			end)
+		end
+	end
+end)
+
+-- ================== AUTO SPAM ==================
 task.spawn(function()
 	while true do
-		task.wait(0.05)
-		if apEnabled then
-			local ball = findBall()
-			if ball and isBallTargetingMe(ball) then
-				local char = player.Character
-				if char then
-					local tool = char:FindFirstChildOfClass("Tool")
-					if tool then
-						pcall(function() tool:Activate() end)
+		task.wait(0.08)
+		if asEnabled and ParryRemote then
+			pcall(function()
+				ParryRemote:FireServer()
+			end)
+		end
+	end
+end)
+
+-- ================== BALL ESP ==================
+task.spawn(function()
+	while true do
+		task.wait(0.1)
+		if espEnabled then
+			local ballsFolder = workspace:FindFirstChild("Balls")
+			if ballsFolder then
+				for _, ball in ipairs(ballsFolder:GetChildren()) do
+					if ball:IsA("BasePart") then
+						local highlight = ball:FindFirstChildOfClass("Highlight")
+						if highlight then
+							local zoomies = ball:FindFirstChild("zoomies")
+							local speed = 0
+							if zoomies and zoomies:IsA("LinearVelocity") then
+								speed = zoomies.VectorVelocity.Magnitude
+							end
+							local target = ball:GetAttribute("target")
+							if target == player.Name then
+								highlight.FillColor = Color3.fromRGB(255, 0, 0)
+							elseif speed > 20 then
+								highlight.FillColor = Color3.fromRGB(255, 200, 0)
+							else
+								highlight.FillColor = Color3.fromRGB(0, 255, 0)
+							end
+							highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+							highlight.FillTransparency = 0.3
+							highlight.OutlineTransparency = 0
+						end
 					end
 				end
 			end
@@ -757,23 +812,7 @@ task.spawn(function()
 	end
 end)
 
--- Auto Spam
-task.spawn(function()
-	while true do
-		task.wait(0.08)
-		if asEnabled then
-			local char = player.Character
-			if char then
-				local tool = char:FindFirstChildOfClass("Tool")
-				if tool then
-					pcall(function() tool:Activate() end)
-				end
-			end
-		end
-	end
-end)
-
--- UI логика
+-- ================== UI ==================
 BladeBall.OpenBtn.MouseButton1Click:Connect(function()
 	BladeBall.background.Visible = not BladeBall.background.Visible
 end)
@@ -811,7 +850,7 @@ BladeBall.ASBtn.MouseButton1Click:Connect(function()
 	setToggleVisual(BladeBall.ASBtn, asEnabled)
 end)
 
--- Перетаскивание
+-- ================== DRAG ==================
 local dragging, dragStart, startPos
 
 BladeBall.background.InputBegan:Connect(function(input)
