@@ -752,23 +752,18 @@ if not hrp then return nil end
 
 local best, bestDist = nil, maxDist or 500
 for _, obj in ipairs(workspace:GetDescendants()) do
+if obj.Name == "Gold" then
+local pos
 if obj:IsA("BasePart") then
-local n = obj.Name:lower()
-if n:find("gold") or n:find("coin") then
-local d = (obj.Position - hrp.Position).Magnitude
+pos = obj.Position
+elseif obj:IsA("Model") then
+local p = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
+pos = p and p.Position or nil
+end
+if pos then
+local d = (pos - hrp.Position).Magnitude
 if d < bestDist then
 best, bestDist = obj, d
-end
-end
-elseif obj:IsA("Model") then
-local n = obj.Name:lower()
-if n:find("gold") or n:find("coin") then
-local p = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
-if p then
-local d = (p.Position - hrp.Position).Magnitude
-if d < bestDist then
-best, bestDist = p, d
-end
 end
 end
 end
@@ -782,13 +777,64 @@ local hrp = getHRP(char)
 if not hrp then return false end
 
 local gold = findNearestGold(500)
-if not gold then return false end
+if not gold then
+print("[ACG] Золото не найдено")
+return false
+end
 
-hrp.CFrame = CFrame.new(gold.Position + Vector3.new(0, 2, 0))
-task.wait(0.08)
+local pos
+if gold:IsA("BasePart") then pos = gold.Position
+else
+local p = gold.PrimaryPart or gold:FindFirstChildWhichIsA("BasePart")
+pos = p and p.Position
+end
+if not pos then return false end
+
+print("[ACG] Лечу к: " .. gold:GetFullName() .. " на " .. math.floor((pos - hrp.Position).Magnitude) .. " studs")
+
+local before = hrp.Position
+hrp.CFrame = CFrame.new(pos + Vector3.new(0, 2, 0))
+hrp.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+hrp.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+task.wait(0.1)
+
+local moved = (hrp.Position - before).Magnitude
+print("[ACG] Сдвинулись: " .. math.floor(moved) .. " studs")
+
+if moved < 1 then
+print("[ACG] ❌ ТП откатился")
+return false
+end
+
+local prompt = gold:FindFirstChildOfClass("ProximityPrompt")
+if not prompt and gold:IsA("Model") then
+for _, d in ipairs(gold:GetDescendants()) do
+if d:IsA("ProximityPrompt") then
+prompt = d
+break
+end
+end
+end
+
+if prompt then
+print("[ACG] ✅ Найден ProximityPrompt")
+if fireproximityprompt then
+fireproximityprompt(prompt)
+else
+pcall(function()
+prompt:InputHoldBegin()
+task.wait(0.1)
+prompt:InputHoldEnd()
+end)
+end
+else
+print("[ACG] ⚠ ProximityPrompt не найден")
+end
+
+task.wait(0.2)
 
 local success = (not gold.Parent) or (not gold:IsDescendantOf(workspace))
-task.wait(0.05)
+print("[ACG] Подобрано: " .. tostring(success))
 return success
 end
 
