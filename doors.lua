@@ -751,7 +751,7 @@ local hrp = getHRP(char)
 if not hrp then return nil end
 
 local best, bestDist = nil, maxDist or 500
-local names = {"SpawnPile", "ItemSpawn", "GoldDot"}
+local names = {"SpawnPile", "LootHolder", "GoldDot"}
 
 for _, targetName in ipairs(names) do
 for _, room in ipairs(workspace:GetChildren()) do
