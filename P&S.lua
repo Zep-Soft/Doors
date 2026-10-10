@@ -675,14 +675,10 @@ PaintAndSeek.UIStroke.Enabled = true
 PaintAndSeek.UICorner_18.Name = "UICorner"
 PaintAndSeek.UICorner_18.CornerRadius = UDim.new(0, 8)
 
--- ================================================================
--- LOGIC
--- ================================================================
-
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-local ProximityPromptService = game:GetService("ProximityPromptService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
 local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
@@ -693,6 +689,7 @@ local gppEnabled = false
 local speedEnabled = false
 local atEnabled = false
 local espCache = {}
+local GPP_PROMPTS = {}
 
 local function getHRP(char)
 	return char and char:FindFirstChild("HumanoidRootPart")
@@ -703,7 +700,20 @@ local function setToggleVisual(btn, state)
 	btn.BackgroundColor3 = state and BTN_ON_COLOR or BTN_OFF_COLOR
 end
 
--- ================== ESP PLAYERS (РАДУЖНЫЙ) ==================
+local function isPlayerSeeker(plr)
+	local char = plr.Character
+	if not char then return false end
+	for _, tool in ipairs(char:GetChildren()) do
+		if tool:IsA("Tool") then
+			local name = tool.Name:lower()
+			if name:find("knife") or name:find("paint") or name:find("brush") then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 local function createESPForPlayer(plr)
 	if not plr.Character or espCache[plr] then return end
 	local char = plr.Character
@@ -804,17 +814,11 @@ task.spawn(function()
 	end
 end)
 
--- ================== GPP (GIVE PROXIMITY PROMPT) ==================
--- Если ты искатель: дарит всем прячущимся ProximityPrompt с макс. дальностью,
--- при нажатии на который ты телепортируешься к ним.
-local GPP_PROMPTS = {}
-
 local function createProximityPromptForTarget(targetPlr)
 	if not targetPlr.Character then return end
 	local hrp = targetPlr.Character:FindFirstChild("HumanoidRootPart")
 	if not hrp then return end
 
-	-- Удаляем старый prompt, если был
 	if GPP_PROMPTS[targetPlr] then
 		GPP_PROMPTS[targetPlr]:Destroy()
 		GPP_PROMPTS[targetPlr] = nil
@@ -823,7 +827,7 @@ local function createProximityPromptForTarget(targetPlr)
 	local prompt = Instance.new("ProximityPrompt")
 	prompt.ActionText = "Teleport to " .. targetPlr.Name
 	prompt.ObjectText = "🎨 Hider"
-	prompt.MaxActivationDistance = 9e9 -- максимальная дальность
+	prompt.MaxActivationDistance = 9e9
 	prompt.RequiresLineOfSight = false
 	prompt.HoldDuration = 0
 	prompt.Parent = hrp
@@ -850,30 +854,16 @@ local function removeAllGPP()
 	end
 end
 
-local function isSeeker()
-	-- Проверяем, есть ли у игрока Knife или он в команде Seeker
-	local char = player.Character
-	if not char then return false end
-	-- В Paint and Seek у искателя обычно есть нож или инструмент
-	for _, tool in ipairs(char:GetChildren()) do
-		if tool:IsA("Tool") then
-			local name = tool.Name:lower()
-			if name:find("knife") or name:find("paint") or name:find("brush") then
-				return true
-			end
-		end
-	end
-	return false
-end
-
 task.spawn(function()
 	while true do
 		task.wait(1)
-		if gppEnabled and isSeeker() then
+		if gppEnabled and isPlayerSeeker(player) then
 			for _, plr in ipairs(Players:GetPlayers()) do
 				if plr ~= player and plr.Character then
-					if not GPP_PROMPTS[plr] or not GPP_PROMPTS[plr].Parent then
-						createProximityPromptForTarget(plr)
+					if not isPlayerSeeker(plr) then
+						if not GPP_PROMPTS[plr] or not GPP_PROMPTS[plr].Parent then
+							createProximityPromptForTarget(plr)
+						end
 					end
 				end
 			end
@@ -881,7 +871,6 @@ task.spawn(function()
 	end
 end)
 
--- ================== SPEED = 50 ==================
 task.spawn(function()
 	while true do
 		task.wait(0.5)
@@ -897,40 +886,47 @@ task.spawn(function()
 	end
 end)
 
--- ================== AUTO-TAUNT ==================
--- Для прячущегося: авто-таунт (провокация) с кулдауном
-local AT_COOLDOWN = 1.5
+local AT_COOLDOWN = 5
 local lastAT = 0
+
+local function findTauntButton()
+	local pg = player:FindFirstChild("PlayerGui")
+	if not pg then return nil end
+	for _, obj in ipairs(pg:GetDescendants()) do
+		if obj.Name == "TauntButton" and (obj:IsA("TextButton") or obj:IsA("ImageButton")) then
+			return obj
+		end
+	end
+	return nil
+end
+
+local function pressButton(btn)
+	if not btn then return false end
+	local ok = pcall(function()
+		local pos = btn.AbsolutePosition + btn.AbsoluteSize / 2
+		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y, 0, true, game, 0)
+		task.wait(0.05)
+		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y, 0, false, game, 0)
+	end)
+	return ok
+end
 
 task.spawn(function()
 	while true do
-		task.wait(0.1)
-		if atEnabled then
+		task.wait(0.5)
+		if atEnabled and not isPlayerSeeker(player) then
 			local now = tick()
 			if now - lastAT >= AT_COOLDOWN then
 				lastAT = now
-				-- Ищем remote для таунта
-				local ReplicatedStorage = game:GetService("ReplicatedStorage")
-				local remotes = ReplicatedStorage:FindFirstChild("Remotes") or ReplicatedStorage:FindFirstChild("RemoteEvents")
-				if remotes then
-					for _, remote in ipairs(remotes:GetChildren()) do
-						if remote:IsA("RemoteEvent") then
-							local n = remote.Name:lower()
-							if n:find("taunt") or n:find("whistle") or n:find("mock") then
-								pcall(function()
-									remote:FireServer()
-								end)
-								break
-							end
-						end
-					end
+				local btn = findTauntButton()
+				if btn and btn.Visible then
+					pressButton(btn)
 				end
 			end
 		end
 	end
 end)
 
--- ================== UI ==================
 PaintAndSeek.OpenBtn.MouseButton1Click:Connect(function()
 	PaintAndSeek.background.Visible = not PaintAndSeek.background.Visible
 end)
@@ -981,7 +977,6 @@ PaintAndSeek.ATBtn.MouseButton1Click:Connect(function()
 	setToggleVisual(PaintAndSeek.ATBtn, atEnabled)
 end)
 
--- ================== DRAG ==================
 local dragging, dragStart, startPos
 
 PaintAndSeek.background.InputBegan:Connect(function(input)
