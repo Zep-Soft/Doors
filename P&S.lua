@@ -886,7 +886,7 @@ task.spawn(function()
 	end
 end)
 
-local AT_COOLDOWN = 5
+local AT_COOLDOWN = 5.1
 local lastAT = 0
 
 local function findTauntButton()
@@ -916,7 +916,7 @@ local function pressButton(btn)
 		local guiInset = GuiService:GetGuiInset()
 		local pos = btn.AbsolutePosition + btn.AbsoluteSize / 2
 		VirtualInputManager:SendMouseButtonEvent(pos.X + 20, pos.Y + guiInset.Y, 0, true, game, 0)
-		task.wait(0.05)
+		task.wait(0.4)
 		VirtualInputManager:SendMouseButtonEvent(pos.X + 20, pos.Y + guiInset.Y, 0, false, game, 0)
 	end)
 	return ok
