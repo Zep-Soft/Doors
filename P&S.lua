@@ -915,9 +915,9 @@ local function pressButton(btn)
 	ok = pcall(function()
 		local guiInset = GuiService:GetGuiInset()
 		local pos = btn.AbsolutePosition + btn.AbsoluteSize / 2
-		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y + guiInset.Y, 0, true, game, 0)
+		VirtualInputManager:SendMouseButtonEvent(pos.X - 5, pos.Y + guiInset.Y, 0, true, game, 0)
 		task.wait(0.05)
-		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y + guiInset.Y, 0, false, game, 0)
+		VirtualInputManager:SendMouseButtonEvent(pos.X - 5, pos.Y + guiInset.Y, 0, false, game, 0)
 	end)
 	return ok
 end
