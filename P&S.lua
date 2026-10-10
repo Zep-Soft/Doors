@@ -676,9 +676,9 @@ PaintAndSeek.UICorner_18.Name = "UICorner"
 PaintAndSeek.UICorner_18.CornerRadius = UDim.new(0, 8)
 
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
+local GuiService = game:GetService("GuiService")
 local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
@@ -903,10 +903,21 @@ end
 local function pressButton(btn)
 	if not btn then return false end
 	local ok = pcall(function()
+		btn.MouseButton1Down:Fire()
+		btn.MouseButton1Up:Fire()
+		btn.MouseButton1Click:Fire()
+	end)
+	if ok then return true end
+	ok = pcall(function()
+		btn.Activated:Fire()
+	end)
+	if ok then return true end
+	ok = pcall(function()
+		local guiInset = GuiService:GetGuiInset()
 		local pos = btn.AbsolutePosition + btn.AbsoluteSize / 2
-		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y, 0, true, game, 0)
+		VirtualInputManager:SendMouseButtonEvent(pos.X + guiInset.X, pos.Y + guiInset.Y, 0, true, game, 0)
 		task.wait(0.05)
-		VirtualInputManager:SendMouseButtonEvent(pos.X, pos.Y, 0, false, game, 0)
+		VirtualInputManager:SendMouseButtonEvent(pos.X + guiInset.X, pos.Y + guiInset.Y, 0, false, game, 0)
 	end)
 	return ok
 end
