@@ -237,8 +237,8 @@ Doors.UICorner_4.CornerRadius = UDim.new(0, 8)
 
 Doors.ESPBtn.Name = "ESPBtn"
 Doors.ESPBtn.ZIndex = 1
-Doors.ESPBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
-Doors.ESPBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
+Doors.ESPBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
+Doors.ESPBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
 Doors.ESPBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 Doors.ESPBtn.BackgroundTransparency = 0
 Doors.ESPBtn.Text = "OFF"
@@ -392,8 +392,8 @@ Doors.UICorner_9.CornerRadius = UDim.new(0, 8)
 
 Doors.ACGBtn.Name = "ACGBtn"
 Doors.ACGBtn.ZIndex = 1
-Doors.ACGBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
-Doors.ACGBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
+Doors.ACGBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
+Doors.ACGBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
 Doors.ACGBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 Doors.ACGBtn.BackgroundTransparency = 0
 Doors.ACGBtn.Text = "OFF"
@@ -485,8 +485,8 @@ Doors.UICorner_12.CornerRadius = UDim.new(0, 8)
 
 Doors.AhBtn.Name = "AhBtn"
 Doors.AhBtn.ZIndex = 1
-Doors.AhBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
-Doors.AhBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
+Doors.AhBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
+Doors.AhBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
 Doors.AhBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 Doors.AhBtn.BackgroundTransparency = 0
 Doors.AhBtn.Text = "OFF"
@@ -592,10 +592,7 @@ Doors.UICorner_15.Name = "UICorner"
 Doors.UICorner_15.CornerRadius = UDim.new(0, 8)
 
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
-local ProximityPromptService = game:GetService("ProximityPromptService")
-local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
@@ -799,20 +796,14 @@ local function runACG()
 if acgBusy or not acgEnabled then return end
 acgBusy = true
 
-local collected = 0
 for i = 1, 30 do
 if not acgEnabled then break end
 local ok = collectOneGold()
-if ok then
-collected = collected + 1
-else
-break
-end
+if not ok then break end
 task.wait(0.05)
 end
 
 acgBusy = false
-return collected
 end
 
 local function findHealTool()
@@ -857,35 +848,30 @@ end
 ahBusy = false
 end
 
-task.spawn(function()
-while true do
+local function watchHealth(char)
+if not char then return end
+local hum = char:FindFirstChildOfClass("Humanoid")
+if not hum then return end
+hum.HealthChanged:Connect(function(hp)
+if ahEnabled and hp < hum.MaxHealth then
+task.spawn(runAutoHeal)
+end
+end)
+end
+
+if player.Character then
+watchHealth(player.Character)
+end
+player.CharacterAdded:Connect(function(char)
 task.wait(0.5)
-if ahEnabled then runAutoHeal() end
-end
+watchHealth(char)
 end)
 
-ProximityPromptService.PromptTriggered:Connect(function(prompt, plr)
-if plr ~= player then return end
-if not acgEnabled then return end
-
-local obj = prompt.Parent
-local n = obj and obj.Name and obj.Name:lower() or ""
-if n:find("door") or n:find("open") or n:find("unlock") or obj:IsA("BasePart") then
-task.wait(0.3)
-task.spawn(runACG)
-end
-end)
-
-local lastCount = #workspace:GetChildren()
 task.spawn(function()
 while true do
-task.wait(0.6)
-if acgEnabled then
-local c = #workspace:GetChildren()
-if c ~= lastCount then
-lastCount = c
+task.wait(1.5)
+if acgEnabled and not acgBusy then
 task.spawn(runACG)
-end
 end
 end
 end)
@@ -967,7 +953,12 @@ end
 end)
 
 if Doors.NickLabel then
-Doors.NickLabel.Text = player.DisplayName .. " (" .. player.Name .. ")"
+Doors.NickLabel.Text = "@" .. player.Name
 end
 
-print("ZepHub Logic loaded")
+if Doors.IconImage then
+Doors.IconImage.Image = "rbxthumb://type=AvatarHeadShot&id=" .. player.UserId .. "&w=150&h=150"
+Doors.IconImage.ImageTransparency = 0
+end
+
+print("ZepHub loaded")
