@@ -15,39 +15,48 @@ local PaintAndSeek = {
 	ESPBtn = Instance.new("TextButton"),
 	UICorner_5 = Instance.new("UICorner"),
 	MoreSoon = Instance.new("TextLabel"),
-	OpenVisualScroll = Instance.new("TextButton"),
+	SFKBackground = Instance.new("TextLabel"),
 	UICorner_6 = Instance.new("UICorner"),
-	OpenMainScroll = Instance.new("TextButton"),
+	SFKBtnSelect = Instance.new("TextButton"),
 	UICorner_7 = Instance.new("UICorner"),
+	SFKLabel = Instance.new("TextLabel"),
+	UICorner_8 = Instance.new("UICorner"),
+	ScrollingKnifes = Instance.new("ScrollingFrame"),
+	UICorner_9 = Instance.new("UICorner"),
+	UIStroke = Instance.new("UIStroke"),
+	OpenVisualScroll = Instance.new("TextButton"),
+	UICorner_10 = Instance.new("UICorner"),
+	OpenMainScroll = Instance.new("TextButton"),
+	UICorner_11 = Instance.new("UICorner"),
 	MainScroll = Instance.new("ScrollingFrame"),
 	GPPBackground = Instance.new("TextLabel"),
-	UICorner_8 = Instance.new("UICorner"),
+	UICorner_12 = Instance.new("UICorner"),
 	GPPBtn = Instance.new("TextButton"),
-	UICorner_9 = Instance.new("UICorner"),
+	UICorner_13 = Instance.new("UICorner"),
 	GPPLabel = Instance.new("TextLabel"),
-	UICorner_10 = Instance.new("UICorner"),
+	UICorner_14 = Instance.new("UICorner"),
 	MoreSoon_2 = Instance.new("TextLabel"),
 	Speed50Background = Instance.new("TextLabel"),
-	UICorner_11 = Instance.new("UICorner"),
-	Sped50Label = Instance.new("TextLabel"),
-	UICorner_12 = Instance.new("UICorner"),
-	Speed50Btn = Instance.new("TextButton"),
-	UICorner_13 = Instance.new("UICorner"),
-	ATBackground = Instance.new("TextLabel"),
-	UICorner_14 = Instance.new("UICorner"),
-	ATLabel = Instance.new("TextLabel"),
 	UICorner_15 = Instance.new("UICorner"),
-	ATBtn = Instance.new("TextButton"),
+	Sped50Label = Instance.new("TextLabel"),
 	UICorner_16 = Instance.new("UICorner"),
-	IconImage = Instance.new("ImageLabel"),
+	Speed50Btn = Instance.new("TextButton"),
 	UICorner_17 = Instance.new("UICorner"),
+	ATBackground = Instance.new("TextLabel"),
+	UICorner_18 = Instance.new("UICorner"),
+	ATLabel = Instance.new("TextLabel"),
+	UICorner_19 = Instance.new("UICorner"),
+	ATBtn = Instance.new("TextButton"),
+	UICorner_20 = Instance.new("UICorner"),
+	IconImage = Instance.new("ImageLabel"),
+	UICorner_21 = Instance.new("UICorner"),
 	MoreSoon_3 = Instance.new("TextLabel"),
 	NickLabel = Instance.new("TextLabel"),
 	OpenBtn = Instance.new("ImageButton"),
-	UIStroke = Instance.new("UIStroke"),
-	UICorner_18 = Instance.new("UICorner"),
-	Notify = Instance.new("ImageLabel"),
 	UIStroke_2 = Instance.new("UIStroke"),
+	UICorner_22 = Instance.new("UICorner"),
+	Notify = Instance.new("ImageLabel"),
+	UIStroke_3 = Instance.new("UIStroke"),
 	Title_Notify_ = Instance.new("TextLabel"),
 	Subtitle_Notify_ = Instance.new("TextLabel"),
 }
@@ -68,39 +77,48 @@ PaintAndSeek.UICorner_4.Parent = PaintAndSeek.EspLabel
 PaintAndSeek.ESPBtn.Parent = PaintAndSeek.EspBackground
 PaintAndSeek.UICorner_5.Parent = PaintAndSeek.ESPBtn
 PaintAndSeek.MoreSoon.Parent = PaintAndSeek.VisualScroll
+PaintAndSeek.SFKBackground.Parent = PaintAndSeek.VisualScroll
+PaintAndSeek.UICorner_6.Parent = PaintAndSeek.SFKBackground
+PaintAndSeek.SFKBtnSelect.Parent = PaintAndSeek.SFKBackground
+PaintAndSeek.UICorner_7.Parent = PaintAndSeek.SFKBtnSelect
+PaintAndSeek.SFKLabel.Parent = PaintAndSeek.SFKBackground
+PaintAndSeek.UICorner_8.Parent = PaintAndSeek.SFKLabel
+PaintAndSeek.ScrollingKnifes.Parent = PaintAndSeek.SFKBackground
+PaintAndSeek.UICorner_9.Parent = PaintAndSeek.ScrollingKnifes
+PaintAndSeek.UIStroke.Parent = PaintAndSeek.ScrollingKnifes
 PaintAndSeek.OpenVisualScroll.Parent = PaintAndSeek.background
-PaintAndSeek.UICorner_6.Parent = PaintAndSeek.OpenVisualScroll
+PaintAndSeek.UICorner_10.Parent = PaintAndSeek.OpenVisualScroll
 PaintAndSeek.OpenMainScroll.Parent = PaintAndSeek.background
-PaintAndSeek.UICorner_7.Parent = PaintAndSeek.OpenMainScroll
+PaintAndSeek.UICorner_11.Parent = PaintAndSeek.OpenMainScroll
 PaintAndSeek.MainScroll.Parent = PaintAndSeek.background
 PaintAndSeek.GPPBackground.Parent = PaintAndSeek.MainScroll
-PaintAndSeek.UICorner_8.Parent = PaintAndSeek.GPPBackground
+PaintAndSeek.UICorner_12.Parent = PaintAndSeek.GPPBackground
 PaintAndSeek.GPPBtn.Parent = PaintAndSeek.GPPBackground
-PaintAndSeek.UICorner_9.Parent = PaintAndSeek.GPPBtn
+PaintAndSeek.UICorner_13.Parent = PaintAndSeek.GPPBtn
 PaintAndSeek.GPPLabel.Parent = PaintAndSeek.GPPBackground
-PaintAndSeek.UICorner_10.Parent = PaintAndSeek.GPPLabel
+PaintAndSeek.UICorner_14.Parent = PaintAndSeek.GPPLabel
 PaintAndSeek.MoreSoon_2.Parent = PaintAndSeek.MainScroll
 PaintAndSeek.Speed50Background.Parent = PaintAndSeek.MainScroll
-PaintAndSeek.UICorner_11.Parent = PaintAndSeek.Speed50Background
+PaintAndSeek.UICorner_15.Parent = PaintAndSeek.Speed50Background
 PaintAndSeek.Sped50Label.Parent = PaintAndSeek.Speed50Background
-PaintAndSeek.UICorner_12.Parent = PaintAndSeek.Sped50Label
+PaintAndSeek.UICorner_16.Parent = PaintAndSeek.Sped50Label
 PaintAndSeek.Speed50Btn.Parent = PaintAndSeek.Speed50Background
-PaintAndSeek.UICorner_13.Parent = PaintAndSeek.Speed50Btn
+PaintAndSeek.UICorner_17.Parent = PaintAndSeek.Speed50Btn
 PaintAndSeek.ATBackground.Parent = PaintAndSeek.MainScroll
-PaintAndSeek.UICorner_14.Parent = PaintAndSeek.ATBackground
+PaintAndSeek.UICorner_18.Parent = PaintAndSeek.ATBackground
 PaintAndSeek.ATLabel.Parent = PaintAndSeek.ATBackground
-PaintAndSeek.UICorner_15.Parent = PaintAndSeek.ATLabel
+PaintAndSeek.UICorner_19.Parent = PaintAndSeek.ATLabel
 PaintAndSeek.ATBtn.Parent = PaintAndSeek.ATBackground
-PaintAndSeek.UICorner_16.Parent = PaintAndSeek.ATBtn
+PaintAndSeek.UICorner_20.Parent = PaintAndSeek.ATBtn
 PaintAndSeek.IconImage.Parent = PaintAndSeek.background
-PaintAndSeek.UICorner_17.Parent = PaintAndSeek.IconImage
+PaintAndSeek.UICorner_21.Parent = PaintAndSeek.IconImage
 PaintAndSeek.MoreSoon_3.Parent = PaintAndSeek.background
 PaintAndSeek.NickLabel.Parent = PaintAndSeek.background
 PaintAndSeek.OpenBtn.Parent = PaintAndSeek.PaintAndSeek
-PaintAndSeek.UIStroke.Parent = PaintAndSeek.OpenBtn
-PaintAndSeek.UICorner_18.Parent = PaintAndSeek.OpenBtn
+PaintAndSeek.UIStroke_2.Parent = PaintAndSeek.OpenBtn
+PaintAndSeek.UICorner_22.Parent = PaintAndSeek.OpenBtn
 PaintAndSeek.Notify.Parent = PaintAndSeek.PaintAndSeek
-PaintAndSeek.UIStroke_2.Parent = PaintAndSeek.Notify
+PaintAndSeek.UIStroke_3.Parent = PaintAndSeek.Notify
 PaintAndSeek.Title_Notify_.Parent = PaintAndSeek.Notify
 PaintAndSeek.Subtitle_Notify_.Parent = PaintAndSeek.Notify
 
@@ -111,7 +129,7 @@ PaintAndSeek.PaintAndSeek.DisplayOrder = 0
 
 PaintAndSeek.background.Name = "background"
 PaintAndSeek.background.ZIndex = 1
-PaintAndSeek.background.Position = UDim2.new(0.270683438, 0, 0.157894745, 0)
+PaintAndSeek.background.Position = UDim2.new(0.270683438, 0, 0.157894731, 0)
 PaintAndSeek.background.Size = UDim2.new(0.457014412, 0, 0.682343006, 0)
 PaintAndSeek.background.BackgroundColor3 = Color3.fromRGB(116,116,116)
 PaintAndSeek.background.BackgroundTransparency = 0.15000000596046448
@@ -119,7 +137,7 @@ PaintAndSeek.background.Image = "rbxassetid://7388383866"
 PaintAndSeek.background.ScaleType = Enum.ScaleType.Stretch
 PaintAndSeek.background.ImageColor3 = Color3.fromRGB(255,255,255)
 PaintAndSeek.background.ImageTransparency = 0.5099999904632568
-PaintAndSeek.background.Visible = false
+PaintAndSeek.background.Visible = true
 PaintAndSeek.background.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.background.ClipsDescendants = false
 
@@ -199,18 +217,18 @@ PaintAndSeek.VisualScroll.Position = UDim2.new(0.262108475, 0, 0.131210536, 0)
 PaintAndSeek.VisualScroll.Size = UDim2.new(0.737121761, 0, 0.868789434, 0)
 PaintAndSeek.VisualScroll.BackgroundColor3 = Color3.fromRGB(255,255,255)
 PaintAndSeek.VisualScroll.BackgroundTransparency = 1
-PaintAndSeek.VisualScroll.Visible = false
+PaintAndSeek.VisualScroll.Visible = true
 PaintAndSeek.VisualScroll.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.VisualScroll.ClipsDescendants = true
-PaintAndSeek.VisualScroll.CanvasSize = UDim2.new(0, 0, 2, 0)
+PaintAndSeek.VisualScroll.CanvasSize = UDim2.new(0, 0, 0, 0)
 PaintAndSeek.VisualScroll.ScrollBarThickness = 12
 PaintAndSeek.VisualScroll.ScrollingEnabled = true
 PaintAndSeek.VisualScroll.BorderSizePixel = 0
 
 PaintAndSeek.EspBackground.Name = "EspBackground"
 PaintAndSeek.EspBackground.ZIndex = 1
-PaintAndSeek.EspBackground.Position = UDim2.new(0.0160857085, 0, 0.012440905, 0)
-PaintAndSeek.EspBackground.Size = UDim2.new(0.952547193, 0, 0.0557125136, 0)
+PaintAndSeek.EspBackground.Position = UDim2.new(0.0160855912, 0, 0.012440864, 0)
+PaintAndSeek.EspBackground.Size = UDim2.new(0.952547252, 0, 0.120599188, 0)
 PaintAndSeek.EspBackground.BackgroundColor3 = Color3.fromRGB(204,204,204)
 PaintAndSeek.EspBackground.BackgroundTransparency = 0.3499999940395355
 PaintAndSeek.EspBackground.Text = ""
@@ -281,8 +299,8 @@ PaintAndSeek.UICorner_5.CornerRadius = UDim.new(0, 0)
 
 PaintAndSeek.MoreSoon.Name = "MoreSoon"
 PaintAndSeek.MoreSoon.ZIndex = 1
-PaintAndSeek.MoreSoon.Position = UDim2.new(0.179015741, 0, 0.0815486759, 0)
-PaintAndSeek.MoreSoon.Size = UDim2.new(0.551548004, 0, 0.0570118167, 0)
+PaintAndSeek.MoreSoon.Position = UDim2.new(0.187252432, 0, 0.358408093, 0)
+PaintAndSeek.MoreSoon.Size = UDim2.new(0.551548004, 0, 0.131474853, 0)
 PaintAndSeek.MoreSoon.BackgroundColor3 = Color3.fromRGB(255,255,255)
 PaintAndSeek.MoreSoon.BackgroundTransparency = 1
 PaintAndSeek.MoreSoon.Text = "More functions soon..."
@@ -299,6 +317,103 @@ PaintAndSeek.MoreSoon.TextTransparency = 0
 PaintAndSeek.MoreSoon.Visible = true
 PaintAndSeek.MoreSoon.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.MoreSoon.ClipsDescendants = false
+
+PaintAndSeek.SFKBackground.Name = "SFKBackground"
+PaintAndSeek.SFKBackground.ZIndex = 1
+PaintAndSeek.SFKBackground.Position = UDim2.new(0.0160855912, 0, 0.168637499, 0)
+PaintAndSeek.SFKBackground.Size = UDim2.new(0.952547252, 0, 0.120599218, 0)
+PaintAndSeek.SFKBackground.BackgroundColor3 = Color3.fromRGB(204,204,204)
+PaintAndSeek.SFKBackground.BackgroundTransparency = 0.3499999940395355
+PaintAndSeek.SFKBackground.Text = ""
+PaintAndSeek.SFKBackground.TextScaled = false
+PaintAndSeek.SFKBackground.TextSize = 14
+PaintAndSeek.SFKBackground.Font = Enum.Font.SourceSans
+PaintAndSeek.SFKBackground.TextColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.SFKBackground.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.SFKBackground.TextStrokeTransparency = 1
+PaintAndSeek.SFKBackground.TextWrapped = false
+PaintAndSeek.SFKBackground.TextXAlignment = Enum.TextXAlignment.Center
+PaintAndSeek.SFKBackground.TextYAlignment = Enum.TextYAlignment.Center
+PaintAndSeek.SFKBackground.TextTransparency = 0
+PaintAndSeek.SFKBackground.Visible = true
+PaintAndSeek.SFKBackground.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.SFKBackground.ClipsDescendants = false
+
+PaintAndSeek.UICorner_6.Name = "UICorner"
+PaintAndSeek.UICorner_6.CornerRadius = UDim.new(0, 8)
+
+PaintAndSeek.SFKBtnSelect.Name = "SFKBtnSelect"
+PaintAndSeek.SFKBtnSelect.ZIndex = 1
+PaintAndSeek.SFKBtnSelect.Position = UDim2.new(0.656124592, 0, 1.00000036, 0)
+PaintAndSeek.SFKBtnSelect.Size = UDim2.new(0.343875229, 0, -1.00662899, 0)
+PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(255,0,0)
+PaintAndSeek.SFKBtnSelect.BackgroundTransparency = 0
+PaintAndSeek.SFKBtnSelect.Text = "Select"
+PaintAndSeek.SFKBtnSelect.TextScaled = true
+PaintAndSeek.SFKBtnSelect.TextSize = 14
+PaintAndSeek.SFKBtnSelect.Font = Enum.Font.FredokaOne
+PaintAndSeek.SFKBtnSelect.TextColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.SFKBtnSelect.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.SFKBtnSelect.TextStrokeTransparency = 0
+PaintAndSeek.SFKBtnSelect.TextWrapped = true
+PaintAndSeek.SFKBtnSelect.TextXAlignment = Enum.TextXAlignment.Center
+PaintAndSeek.SFKBtnSelect.TextYAlignment = Enum.TextYAlignment.Center
+PaintAndSeek.SFKBtnSelect.TextTransparency = 0
+PaintAndSeek.SFKBtnSelect.Visible = true
+PaintAndSeek.SFKBtnSelect.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.SFKBtnSelect.ClipsDescendants = false
+
+PaintAndSeek.UICorner_7.Name = "UICorner"
+PaintAndSeek.UICorner_7.CornerRadius = UDim.new(0, 0)
+
+PaintAndSeek.SFKLabel.Name = "SFKLabel"
+PaintAndSeek.SFKLabel.ZIndex = 1
+PaintAndSeek.SFKLabel.Position = UDim2.new(0.0252449643, 0, -0.00662869727, 0)
+PaintAndSeek.SFKLabel.Size = UDim2.new(0.368041784, 0, 0.984302223, 0)
+PaintAndSeek.SFKLabel.BackgroundColor3 = Color3.fromRGB(204,204,204)
+PaintAndSeek.SFKLabel.BackgroundTransparency = 1
+PaintAndSeek.SFKLabel.Text = "Skins for knifes"
+PaintAndSeek.SFKLabel.TextScaled = true
+PaintAndSeek.SFKLabel.TextSize = 14
+PaintAndSeek.SFKLabel.Font = Enum.Font.FredokaOne
+PaintAndSeek.SFKLabel.TextColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.SFKLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.SFKLabel.TextStrokeTransparency = 0
+PaintAndSeek.SFKLabel.TextWrapped = true
+PaintAndSeek.SFKLabel.TextXAlignment = Enum.TextXAlignment.Center
+PaintAndSeek.SFKLabel.TextYAlignment = Enum.TextYAlignment.Center
+PaintAndSeek.SFKLabel.TextTransparency = 0
+PaintAndSeek.SFKLabel.Visible = true
+PaintAndSeek.SFKLabel.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.SFKLabel.ClipsDescendants = false
+
+PaintAndSeek.UICorner_8.Name = "UICorner"
+PaintAndSeek.UICorner_8.CornerRadius = UDim.new(0, 8)
+
+PaintAndSeek.ScrollingKnifes.Name = "ScrollingKnifes"
+PaintAndSeek.ScrollingKnifes.ZIndex = 1
+PaintAndSeek.ScrollingKnifes.Position = UDim2.new(0.514200449, 0, 1.25476348, 0)
+PaintAndSeek.ScrollingKnifes.Size = UDim2.new(0.485508114, 0, 4.12679625, 0)
+PaintAndSeek.ScrollingKnifes.BackgroundColor3 = Color3.fromRGB(47,41,38)
+PaintAndSeek.ScrollingKnifes.BackgroundTransparency = 0.44999998807907104
+PaintAndSeek.ScrollingKnifes.Visible = false
+PaintAndSeek.ScrollingKnifes.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.ScrollingKnifes.ClipsDescendants = true
+PaintAndSeek.ScrollingKnifes.CanvasSize = UDim2.new(0, 0, 12, 0)
+PaintAndSeek.ScrollingKnifes.ScrollBarThickness = 0
+PaintAndSeek.ScrollingKnifes.ScrollingEnabled = true
+PaintAndSeek.ScrollingKnifes.BorderSizePixel = 0
+
+PaintAndSeek.UICorner_9.Name = "UICorner"
+PaintAndSeek.UICorner_9.CornerRadius = UDim.new(0, 8)
+
+PaintAndSeek.UIStroke.Name = "UIStroke"
+PaintAndSeek.UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+PaintAndSeek.UIStroke.Color = Color3.fromRGB(0,0,0)
+PaintAndSeek.UIStroke.LineJoinMode = Enum.LineJoinMode.Round
+PaintAndSeek.UIStroke.Thickness = 1.5
+PaintAndSeek.UIStroke.Transparency = 0
+PaintAndSeek.UIStroke.Enabled = true
 
 PaintAndSeek.OpenVisualScroll.Name = "OpenVisualScroll"
 PaintAndSeek.OpenVisualScroll.ZIndex = 1
@@ -321,8 +436,8 @@ PaintAndSeek.OpenVisualScroll.Visible = true
 PaintAndSeek.OpenVisualScroll.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.OpenVisualScroll.ClipsDescendants = false
 
-PaintAndSeek.UICorner_6.Name = "UICorner"
-PaintAndSeek.UICorner_6.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_10.Name = "UICorner"
+PaintAndSeek.UICorner_10.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.OpenMainScroll.Name = "OpenMainScroll"
 PaintAndSeek.OpenMainScroll.ZIndex = 1
@@ -345,8 +460,8 @@ PaintAndSeek.OpenMainScroll.Visible = true
 PaintAndSeek.OpenMainScroll.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.OpenMainScroll.ClipsDescendants = false
 
-PaintAndSeek.UICorner_7.Name = "UICorner"
-PaintAndSeek.UICorner_7.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_11.Name = "UICorner"
+PaintAndSeek.UICorner_11.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.MainScroll.Name = "MainScroll"
 PaintAndSeek.MainScroll.ZIndex = 1
@@ -383,8 +498,8 @@ PaintAndSeek.GPPBackground.Visible = true
 PaintAndSeek.GPPBackground.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.GPPBackground.ClipsDescendants = false
 
-PaintAndSeek.UICorner_8.Name = "UICorner"
-PaintAndSeek.UICorner_8.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_12.Name = "UICorner"
+PaintAndSeek.UICorner_12.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.GPPBtn.Name = "GPPBtn"
 PaintAndSeek.GPPBtn.ZIndex = 1
@@ -407,8 +522,8 @@ PaintAndSeek.GPPBtn.Visible = true
 PaintAndSeek.GPPBtn.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.GPPBtn.ClipsDescendants = false
 
-PaintAndSeek.UICorner_9.Name = "UICorner"
-PaintAndSeek.UICorner_9.CornerRadius = UDim.new(0, 0)
+PaintAndSeek.UICorner_13.Name = "UICorner"
+PaintAndSeek.UICorner_13.CornerRadius = UDim.new(0, 0)
 
 PaintAndSeek.GPPLabel.Name = "GPPLabel"
 PaintAndSeek.GPPLabel.ZIndex = 1
@@ -431,8 +546,8 @@ PaintAndSeek.GPPLabel.Visible = true
 PaintAndSeek.GPPLabel.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.GPPLabel.ClipsDescendants = false
 
-PaintAndSeek.UICorner_10.Name = "UICorner"
-PaintAndSeek.UICorner_10.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_14.Name = "UICorner"
+PaintAndSeek.UICorner_14.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.MoreSoon_2.Name = "MoreSoon"
 PaintAndSeek.MoreSoon_2.ZIndex = 1
@@ -476,8 +591,8 @@ PaintAndSeek.Speed50Background.Visible = true
 PaintAndSeek.Speed50Background.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.Speed50Background.ClipsDescendants = false
 
-PaintAndSeek.UICorner_11.Name = "UICorner"
-PaintAndSeek.UICorner_11.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_15.Name = "UICorner"
+PaintAndSeek.UICorner_15.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.Sped50Label.Name = "Sped50Label"
 PaintAndSeek.Sped50Label.ZIndex = 1
@@ -500,8 +615,8 @@ PaintAndSeek.Sped50Label.Visible = true
 PaintAndSeek.Sped50Label.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.Sped50Label.ClipsDescendants = false
 
-PaintAndSeek.UICorner_12.Name = "UICorner"
-PaintAndSeek.UICorner_12.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_16.Name = "UICorner"
+PaintAndSeek.UICorner_16.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.Speed50Btn.Name = "Speed50Btn"
 PaintAndSeek.Speed50Btn.ZIndex = 1
@@ -524,8 +639,8 @@ PaintAndSeek.Speed50Btn.Visible = true
 PaintAndSeek.Speed50Btn.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.Speed50Btn.ClipsDescendants = false
 
-PaintAndSeek.UICorner_13.Name = "UICorner"
-PaintAndSeek.UICorner_13.CornerRadius = UDim.new(0, 0)
+PaintAndSeek.UICorner_17.Name = "UICorner"
+PaintAndSeek.UICorner_17.CornerRadius = UDim.new(0, 0)
 
 PaintAndSeek.ATBackground.Name = "ATBackground"
 PaintAndSeek.ATBackground.ZIndex = 1
@@ -548,8 +663,8 @@ PaintAndSeek.ATBackground.Visible = true
 PaintAndSeek.ATBackground.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.ATBackground.ClipsDescendants = false
 
-PaintAndSeek.UICorner_14.Name = "UICorner"
-PaintAndSeek.UICorner_14.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_18.Name = "UICorner"
+PaintAndSeek.UICorner_18.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.ATLabel.Name = "ATLabel"
 PaintAndSeek.ATLabel.ZIndex = 1
@@ -572,8 +687,8 @@ PaintAndSeek.ATLabel.Visible = true
 PaintAndSeek.ATLabel.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.ATLabel.ClipsDescendants = false
 
-PaintAndSeek.UICorner_15.Name = "UICorner"
-PaintAndSeek.UICorner_15.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_19.Name = "UICorner"
+PaintAndSeek.UICorner_19.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.ATBtn.Name = "ATBtn"
 PaintAndSeek.ATBtn.ZIndex = 1
@@ -596,8 +711,8 @@ PaintAndSeek.ATBtn.Visible = true
 PaintAndSeek.ATBtn.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.ATBtn.ClipsDescendants = false
 
-PaintAndSeek.UICorner_16.Name = "UICorner"
-PaintAndSeek.UICorner_16.CornerRadius = UDim.new(0, 0)
+PaintAndSeek.UICorner_20.Name = "UICorner"
+PaintAndSeek.UICorner_20.CornerRadius = UDim.new(0, 0)
 
 PaintAndSeek.IconImage.Name = "IconImage"
 PaintAndSeek.IconImage.ZIndex = 1
@@ -613,8 +728,8 @@ PaintAndSeek.IconImage.Visible = true
 PaintAndSeek.IconImage.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.IconImage.ClipsDescendants = false
 
-PaintAndSeek.UICorner_17.Name = "UICorner"
-PaintAndSeek.UICorner_17.CornerRadius = UDim.new(0, 100)
+PaintAndSeek.UICorner_21.Name = "UICorner"
+PaintAndSeek.UICorner_21.CornerRadius = UDim.new(0, 100)
 
 PaintAndSeek.MoreSoon_3.Name = "MoreSoon"
 PaintAndSeek.MoreSoon_3.ZIndex = 1
@@ -672,16 +787,16 @@ PaintAndSeek.OpenBtn.Visible = true
 PaintAndSeek.OpenBtn.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.OpenBtn.ClipsDescendants = false
 
-PaintAndSeek.UIStroke.Name = "UIStroke"
-PaintAndSeek.UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-PaintAndSeek.UIStroke.Color = Color3.fromRGB(216,21,255)
-PaintAndSeek.UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-PaintAndSeek.UIStroke.Thickness = 1
-PaintAndSeek.UIStroke.Transparency = 0
-PaintAndSeek.UIStroke.Enabled = true
+PaintAndSeek.UIStroke_2.Name = "UIStroke"
+PaintAndSeek.UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+PaintAndSeek.UIStroke_2.Color = Color3.fromRGB(216,21,255)
+PaintAndSeek.UIStroke_2.LineJoinMode = Enum.LineJoinMode.Round
+PaintAndSeek.UIStroke_2.Thickness = 1
+PaintAndSeek.UIStroke_2.Transparency = 0
+PaintAndSeek.UIStroke_2.Enabled = true
 
-PaintAndSeek.UICorner_18.Name = "UICorner"
-PaintAndSeek.UICorner_18.CornerRadius = UDim.new(0, 8)
+PaintAndSeek.UICorner_22.Name = "UICorner"
+PaintAndSeek.UICorner_22.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.Notify.Name = "Notify"
 PaintAndSeek.Notify.ZIndex = 1
@@ -693,17 +808,17 @@ PaintAndSeek.Notify.Image = ""
 PaintAndSeek.Notify.ScaleType = Enum.ScaleType.Stretch
 PaintAndSeek.Notify.ImageColor3 = Color3.fromRGB(255,255,255)
 PaintAndSeek.Notify.ImageTransparency = 0
-PaintAndSeek.Notify.Visible = true
+PaintAndSeek.Notify.Visible = false
 PaintAndSeek.Notify.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.Notify.ClipsDescendants = false
 
-PaintAndSeek.UIStroke_2.Name = "UIStroke"
-PaintAndSeek.UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-PaintAndSeek.UIStroke_2.Color = Color3.fromRGB(255,255,255)
-PaintAndSeek.UIStroke_2.LineJoinMode = Enum.LineJoinMode.Round
-PaintAndSeek.UIStroke_2.Thickness = 2
-PaintAndSeek.UIStroke_2.Transparency = 0
-PaintAndSeek.UIStroke_2.Enabled = true
+PaintAndSeek.UIStroke_3.Name = "UIStroke"
+PaintAndSeek.UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+PaintAndSeek.UIStroke_3.Color = Color3.fromRGB(255,255,255)
+PaintAndSeek.UIStroke_3.LineJoinMode = Enum.LineJoinMode.Round
+PaintAndSeek.UIStroke_3.Thickness = 2
+PaintAndSeek.UIStroke_3.Transparency = 0
+PaintAndSeek.UIStroke_3.Enabled = true
 
 PaintAndSeek.Title_Notify_.Name = "Title(Notify)"
 PaintAndSeek.Title_Notify_.ZIndex = 1
@@ -753,6 +868,7 @@ local VirtualInputManager = game:GetService("VirtualInputManager")
 local GuiService = game:GetService("GuiService")
 local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
 local BTN_OFF_COLOR = Color3.fromRGB(255, 0, 0)
@@ -1285,7 +1401,321 @@ if PaintAndSeek.IconImage then
 	PaintAndSeek.IconImage.ImageTransparency = 0
 end
 
+-- ====== ЗАПОЛНЕНИЕ ScrollingKnifes ======
+local WORKING_SKINS = {
+	"BaseballKnife", "BasketballKnife", "CarnotaurHornKnife",
+	"DarkroseBlade", "DilophosaurFrillKnife", "DinoEggBladeKnife",
+	"FireworkFalcon", "FootballKnife", "FreedomsTorch", "FrozenKnife",
+	"GolfKnife", "IndependenceBlade", "InfernoBlade", "LibertyWing",
+	"LightEnergy", "NatureBlade", "PetrosaurWingKnife", "PlasmaDagger",
+	"PyramidKnife", "RocketsRoar", "SpinosaurSailKnife", "StormKnife",
+	"TennisKnife", "TidalEdge", "TriceraptorsGuardKnife", "UltimateSoccerKnife",
+}
+
+local KnifeSkins = ReplicatedStorage:FindFirstChild("KnifeSkins")
+
+PaintAndSeek.ScrollingKnifes.Visible = false
+PaintAndSeek.ScrollingKnifes.CanvasSize = UDim2.new(0, 0, 0, 0)
+PaintAndSeek.ScrollingKnifes.AutomaticCanvasSize = Enum.AutomaticSize.Y
+PaintAndSeek.ScrollingKnifes.ScrollBarThickness = 6
+PaintAndSeek.ScrollingKnifes.ScrollBarImageColor3 = Color3.fromRGB(0, 255, 150)
+PaintAndSeek.ScrollingKnifes.BackgroundTransparency = 0.2
+PaintAndSeek.ScrollingKnifes.ZIndex = 10
+
+for _, ch in ipairs(PaintAndSeek.ScrollingKnifes:GetChildren()) do
+	if ch:IsA("TextButton") or ch:IsA("UIListLayout") or ch:IsA("UIPadding") then
+		ch:Destroy()
+	end
+end
+
+local knifesLayout = Instance.new("UIListLayout")
+knifesLayout.Padding = UDim.new(0, 6)
+knifesLayout.SortOrder = Enum.SortOrder.LayoutOrder
+knifesLayout.Parent = PaintAndSeek.ScrollingKnifes
+
+local knifesPad = Instance.new("UIPadding")
+knifesPad.PaddingTop = UDim.new(0, 8)
+knifesPad.PaddingLeft = UDim.new(0, 8)
+knifesPad.PaddingRight = UDim.new(0, 8)
+knifesPad.PaddingBottom = UDim.new(0, 8)
+knifesPad.Parent = PaintAndSeek.ScrollingKnifes
+
+local selectedSkinBtn = nil
+local selectedSkinName = nil
+local selectedSkinModel = nil
+local customKnivesList = {}
+local selectListOpen = false
+
+local function clearCustomKnives()
+	for _, k in ipairs(customKnivesList) do
+		pcall(function() k:Destroy() end)
+	end
+	customKnivesList = {}
+	local char = player.Character
+	if char then
+		for _, obj in ipairs(char:GetChildren()) do
+			if obj:IsA("BasePart") and (obj.Name:lower():find("backknife") or obj.Name:lower():find("zepknife")) then
+				pcall(function() obj:Destroy() end)
+			end
+		end
+	end
+end
+
+local function applyKnifeSkin(skinModel, skinName, silent)
+	local char = player.Character
+	if not char then
+		if not silent then showNotify("❌", "Нет персонажа") end
+		return
+	end
+
+	local upperTorso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso")
+	if not upperTorso then
+		if not silent then showNotify("❌", "Нет UpperTorso") end
+		return
+	end
+
+	clearCustomKnives()
+
+	local handle = skinModel:FindFirstChild("Handle")
+	if not handle then
+		if not silent then showNotify("❌", "Handle не найден") end
+		return
+	end
+
+	local partsToCopy = {}
+	local handleMesh = handle:FindFirstChildOfClass("SpecialMesh")
+	if handleMesh then
+		table.insert(partsToCopy, {type = "special", sourcePart = handle, sourceMesh = handleMesh})
+	end
+	for _, obj in ipairs(handle:GetChildren()) do
+		if obj:IsA("MeshPart") then
+			table.insert(partsToCopy, {type = "meshpart", sourcePart = obj})
+		end
+	end
+
+	if #partsToCopy == 0 then
+		if not silent then showNotify("❌", "Нет частей") end
+		return
+	end
+
+	local mainPart = partsToCopy[1].sourcePart
+	local maxSize = 0
+	for _, item in ipairs(partsToCopy) do
+		local p = item.sourcePart
+		local sz = p.Size.X * p.Size.Y * p.Size.Z
+		if sz > maxSize then maxSize = sz mainPart = p end
+	end
+
+	local backCFrame = upperTorso.CFrame 
+		* CFrame.new(0, 0, 0.8) 
+		* CFrame.Angles(math.rad(90), math.rad(45), math.rad(90))
+
+	for _, item in ipairs(partsToCopy) do
+		local srcPart = item.sourcePart
+		local newPart = Instance.new("Part")
+		newPart.Name = "ZepKnife_" .. srcPart.Name
+		newPart.Size = srcPart.Size
+		newPart.Color = srcPart.Color
+		newPart.Material = srcPart.Material
+		newPart.Transparency = srcPart.Transparency
+		newPart.Anchored = false
+		newPart.CanCollide = false
+		newPart.CanTouch = false
+		newPart.CanQuery = false
+		newPart.Massless = true
+
+		local relativeCFrame = mainPart.CFrame:ToObjectSpace(srcPart.CFrame)
+		newPart.CFrame = backCFrame * relativeCFrame
+
+		if item.type == "special" and item.sourceMesh then
+			local newMesh = Instance.new("SpecialMesh")
+			newMesh.MeshId = item.sourceMesh.MeshId
+			newMesh.TextureId = item.sourceMesh.TextureId
+			newMesh.Scale = item.sourceMesh.Scale
+			newMesh.Offset = item.sourceMesh.Offset
+			newMesh.VertexColor = item.sourceMesh.VertexColor
+			newMesh.MeshType = item.sourceMesh.MeshType
+			newMesh.Parent = newPart
+		elseif item.type == "meshpart" then
+			local newMesh = Instance.new("SpecialMesh")
+			newMesh.MeshId = srcPart.MeshId
+			newMesh.TextureId = srcPart.TextureID
+			newMesh.Parent = newPart
+		end
+
+		newPart.Parent = char
+
+		local weld = Instance.new("Weld")
+		weld.Part0 = upperTorso
+		weld.Part1 = newPart
+		weld.C0 = upperTorso.CFrame:Inverse() * newPart.CFrame
+		weld.Parent = newPart
+
+		table.insert(customKnivesList, newPart)
+	end
+
+	if not silent then
+		showNotify("🔪 " .. skinName, "Скин применён", 2)
+	end
+end
+
+local function setSelectButtonState(isSelected)
+	if isSelected then
+		PaintAndSeek.SFKBtnSelect.Text = "Selected"
+		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(0, 180, 80)
+	else
+		PaintAndSeek.SFKBtnSelect.Text = "Select"
+		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	end
+end
+
+for i, skinName in ipairs(WORKING_SKINS) do
+	local skinModel = KnifeSkins and KnifeSkins:FindFirstChild(skinName)
+
+	local btn = Instance.new("TextButton")
+	btn.Name = "Skin_" .. skinName
+	btn.Size = UDim2.new(1, 0, 0, 40)
+	btn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+	btn.BackgroundTransparency = 0.1
+	btn.BorderSizePixel = 0
+	btn.Text = ""
+	btn.AutoButtonColor = false
+	btn.LayoutOrder = i
+	btn.Parent = PaintAndSeek.ScrollingKnifes
+
+	local btnCorner = Instance.new("UICorner")
+	btnCorner.CornerRadius = UDim.new(0, 8)
+	btnCorner.Parent = btn
+
+	local btnStroke = Instance.new("UIStroke")
+	btnStroke.Thickness = 1.5
+	btnStroke.Color = Color3.fromRGB(80, 80, 120)
+	btnStroke.Transparency = 0.4
+	btnStroke.Parent = btn
+
+	local iconLbl = Instance.new("TextLabel")
+	iconLbl.Size = UDim2.new(0, 30, 1, 0)
+	iconLbl.Position = UDim2.new(0, 6, 0, 0)
+	iconLbl.BackgroundTransparency = 1
+	iconLbl.Text = "🔪"
+	iconLbl.TextColor3 = Color3.fromRGB(255, 200, 100)
+	iconLbl.TextScaled = true
+	iconLbl.Font = Enum.Font.FredokaOne
+	iconLbl.Parent = btn
+
+	local nameLbl = Instance.new("TextLabel")
+	nameLbl.Size = UDim2.new(1, -50, 1, 0)
+	nameLbl.Position = UDim2.new(0, 38, 0, 0)
+	nameLbl.BackgroundTransparency = 1
+	nameLbl.Text = skinName
+	nameLbl.TextColor3 = Color3.fromRGB(255, 255, 255)
+	nameLbl.TextXAlignment = Enum.TextXAlignment.Left
+	nameLbl.TextScaled = true
+	nameLbl.Font = Enum.Font.FredokaOne
+	nameLbl.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+	nameLbl.TextStrokeTransparency = 0.5
+	nameLbl.Parent = btn
+
+	btn.MouseEnter:Connect(function()
+		if selectedSkinBtn ~= btn then
+			TweenService:Create(btn, TweenInfo.new(0.15), {
+				BackgroundColor3 = Color3.fromRGB(50, 50, 70),
+				BackgroundTransparency = 0,
+			}):Play()
+		end
+	end)
+
+	btn.MouseLeave:Connect(function()
+		if selectedSkinBtn ~= btn then
+			TweenService:Create(btn, TweenInfo.new(0.15), {
+				BackgroundColor3 = Color3.fromRGB(35, 35, 50),
+				BackgroundTransparency = 0.1,
+			}):Play()
+		end
+	end)
+
+	btn.MouseButton1Click:Connect(function()
+		if not skinModel then
+			showNotify("❌", "Скин не найден")
+			return
+		end
+
+		if selectedSkinBtn and selectedSkinBtn ~= btn then
+			TweenService:Create(selectedSkinBtn, TweenInfo.new(0.2), {
+				BackgroundColor3 = Color3.fromRGB(35, 35, 50),
+				BackgroundTransparency = 0.1,
+			}):Play()
+			local prevStroke = selectedSkinBtn:FindFirstChildOfClass("UIStroke")
+			if prevStroke then
+				TweenService:Create(prevStroke, TweenInfo.new(0.2), {
+					Color = Color3.fromRGB(80, 80, 120),
+					Transparency = 0.4,
+				}):Play()
+			end
+		end
+
+		TweenService:Create(btn, TweenInfo.new(0.2), {
+			BackgroundColor3 = Color3.fromRGB(0, 180, 80),
+			BackgroundTransparency = 0.1,
+		}):Play()
+		TweenService:Create(btnStroke, TweenInfo.new(0.2), {
+			Color = Color3.fromRGB(0, 255, 150),
+			Transparency = 0,
+		}):Play()
+
+		selectedSkinBtn = btn
+		selectedSkinName = skinName
+		selectedSkinModel = skinModel
+
+		applyKnifeSkin(skinModel, skinName)
+
+		PaintAndSeek.ScrollingKnifes.Visible = false
+		selectListOpen = false
+		setSelectButtonState(true)
+	end)
+end
+
+PaintAndSeek.SFKBtnSelect.MouseButton1Click:Connect(function()
+	if selectListOpen then
+		PaintAndSeek.ScrollingKnifes.Visible = false
+		selectListOpen = false
+	else
+		PaintAndSeek.ScrollingKnifes.Visible = true
+		selectListOpen = true
+		setSelectButtonState(false)
+	end
+end)
+
+task.spawn(function()
+	while true do
+		task.wait(1)
+		if selectedSkinModel and selectedSkinName then
+			local char = player.Character
+			if char then
+				local hasBackKnife = false
+				for _, obj in ipairs(char:GetChildren()) do
+					if obj.Name:lower():find("backknife") then
+						hasBackKnife = true
+						break
+					end
+				end
+
+				local customCount = 0
+				for _, obj in ipairs(char:GetChildren()) do
+					if obj.Name:lower():find("zepknife") then
+						customCount = customCount + 1
+					end
+				end
+
+				if hasBackKnife or customCount == 0 then
+					applyKnifeSkin(selectedSkinModel, selectedSkinName, true)
+				end
+			end
+		end
+	end
+end)
+
 task.wait(0.5)
 showNotify("ZepHub", "Добро пожаловать!", 5)
 
-print("ZepHub Paint and Seek loaded")
+print("[ZepHub] Paint and Seek loaded. Скинов: " .. #WORKING_SKINS)
