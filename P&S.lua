@@ -761,6 +761,7 @@ local espEnabled = false
 local gppEnabled = false
 local speedEnabled = false
 local atEnabled = false
+local atUserEnabled = false
 local espCache = {}
 local GPP_PROMPTS = {}
 
@@ -994,6 +995,7 @@ end)
 
 local AT_COOLDOWN = 5.1
 local lastAT = 0
+local SEEKER_SAFE_DISTANCE = 7
 
 local function findTauntButton()
 	local pg = player:FindFirstChild("PlayerGui")
@@ -1040,6 +1042,31 @@ local function disableAutoTaunt()
 	end
 end
 
+local function enableAutoTauntIfUserWants()
+	if atUserEnabled and not atEnabled and not isPlayerSeeker(player) then
+		atEnabled = true
+		setToggleVisual(PaintAndSeek.ATBtn, true)
+	end
+end
+
+local function getClosestSeekerDistance()
+	local char = player.Character
+	local myHrp = getHRP(char)
+	if not myHrp then return math.huge end
+
+	local closest = math.huge
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr ~= player and plr.Character and isPlayerSeeker(plr) then
+			local hrp = getHRP(plr.Character)
+			if hrp then
+				local d = (hrp.Position - myHrp.Position).Magnitude
+				if d < closest then closest = d end
+			end
+		end
+	end
+	return closest
+end
+
 task.spawn(function()
 	while true do
 		task.wait(0.5)
@@ -1050,7 +1077,24 @@ task.spawn(function()
 				local btn = findTauntButton()
 				if btn and btn.Visible then
 					pressButton(btn)
-					showNotify("Auto-Taunt", "Таунт нажат", 2)
+				end
+			end
+		end
+	end
+end)
+
+task.spawn(function()
+	while true do
+		task.wait(0.2)
+		if atUserEnabled and not isPlayerSeeker(player) then
+			local dist = getClosestSeekerDistance()
+			if dist <= SEEKER_SAFE_DISTANCE then
+				if atEnabled then
+					disableAutoTaunt()
+				end
+			else
+				if not atEnabled then
+					enableAutoTauntIfUserWants()
 				end
 			end
 		end
@@ -1089,32 +1133,11 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-	while true do
-		task.wait(0.1)
-		if atEnabled then
-			local char = player.Character
-			if char then
-				local hum = char:FindFirstChildOfClass("Humanoid")
-				if hum and hum.Health < hum.MaxHealth * 0.6 then
-					disableAutoTaunt()
-				end
-			end
-		end
-	end
-end)
-
-task.spawn(function()
 	local gradient = PaintAndSeek.UIStroke_2:FindFirstChildOfClass("UIGradient")
 	if gradient then
 		while gradient and gradient.Parent do
-			gradient.Offset = Vector2.new(-1, 0)
-			local tween = TweenService:Create(
-				gradient,
-				TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Linear),
-				{ Offset = Vector2.new(1, 0) }
-			)
-			tween:Play()
-			tween.Completed:Wait()
+			gradient.Rotation = (gradient.Rotation + 5) % 360
+			task.wait(0.02)
 		end
 	end
 end)
@@ -1122,9 +1145,9 @@ end)
 task.spawn(function()
 	local hue = 0
 	while PaintAndSeek.Notify and PaintAndSeek.Notify.Parent do
-		hue = (hue + 0.003) % 1
+		hue = (hue + 0.009) % 1
 		PaintAndSeek.Notify.BackgroundColor3 = Color3.fromHSV(hue, 0.7, 1)
-		task.wait(0.03)
+		task.wait(0.02)
 	end
 end)
 
@@ -1177,9 +1200,16 @@ PaintAndSeek.Speed50Btn.MouseButton1Click:Connect(function()
 end)
 
 PaintAndSeek.ATBtn.MouseButton1Click:Connect(function()
-	atEnabled = not atEnabled
-	setToggleVisual(PaintAndSeek.ATBtn, atEnabled)
-	showNotify("Auto-Taunt", atEnabled and "Включен" or "Выключен")
+	atUserEnabled = not atUserEnabled
+	if atUserEnabled then
+		atEnabled = true
+		setToggleVisual(PaintAndSeek.ATBtn, true)
+		showNotify("Auto-Taunt", "Включен")
+	else
+		atEnabled = false
+		setToggleVisual(PaintAndSeek.ATBtn, false)
+		showNotify("Auto-Taunt", "Выключен")
+	end
 end)
 
 local dragging, dragStart, startPos
