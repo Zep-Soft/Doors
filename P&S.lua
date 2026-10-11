@@ -922,6 +922,18 @@ local function pressButton(btn)
 	return ok
 end
 
+local function disableAutoTaunt(reason)
+	if not atEnabled then return end
+	atEnabled = false
+	setToggleVisual(PaintAndSeek.ATBtn, false)
+	local btn = findTauntButton()
+	if btn then
+		pcall(function()
+			btn.MouseButton1Up:Fire()
+		end)
+	end
+end
+
 task.spawn(function()
 	while true do
 		task.wait(0.5)
@@ -932,6 +944,52 @@ task.spawn(function()
 				local btn = findTauntButton()
 				if btn and btn.Visible then
 					pressButton(btn)
+				end
+			end
+		end
+	end
+end)
+
+local function watchDeath(char)
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+
+	hum.Died:Connect(function()
+		disableAutoTaunt("died")
+	end)
+end
+
+if player.Character then
+	watchDeath(player.Character)
+end
+
+player.CharacterAdded:Connect(function(char)
+	task.wait(0.5)
+	watchDeath(char)
+end)
+
+task.spawn(function()
+	local wasSeeker = false
+	while true do
+		task.wait(0.2)
+		local isSeekerNow = isPlayerSeeker(player)
+		if isSeekerNow and not wasSeeker then
+			disableAutoTaunt("becameSeeker")
+		end
+		wasSeeker = isSeekerNow
+	end
+end)
+
+task.spawn(function()
+	while true do
+		task.wait(0.1)
+		if atEnabled then
+			local char = player.Character
+			if char then
+				local hum = char:FindFirstChildOfClass("Humanoid")
+				if hum and hum.Health < hum.MaxHealth * 0.6 then
+					disableAutoTaunt("lowHP")
 				end
 			end
 		end
