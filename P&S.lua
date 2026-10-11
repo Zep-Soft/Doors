@@ -794,7 +794,7 @@ PaintAndSeek.Notify.Position = UDim2.new(1, 400, 0.762309015, 0)
 local notifyOriginalPos = UDim2.new(0.850826025, 0, 0.762309015, 0)
 
 local function showNotify(titleText, subtitleText, duration)
-	duration = duration or 3
+	duration = duration or 5
 
 	PaintAndSeek.Title_Notify_.Text = titleText or ""
 	PaintAndSeek.Subtitle_Notify_.Text = subtitleText or ""
@@ -1030,25 +1030,6 @@ local function pressButton(btn)
 	return ok
 end
 
-local function disableAutoTaunt()
-	if not atEnabled then return end
-	atEnabled = false
-	setToggleVisual(PaintAndSeek.ATBtn, false)
-	local btn = findTauntButton()
-	if btn then
-		pcall(function()
-			btn.MouseButton1Up:Fire()
-		end)
-	end
-end
-
-local function enableAutoTauntIfUserWants()
-	if atUserEnabled and not atEnabled and not isPlayerSeeker(player) then
-		atEnabled = true
-		setToggleVisual(PaintAndSeek.ATBtn, true)
-	end
-end
-
 local function getClosestSeekerDistance()
 	local char = player.Character
 	local myHrp = getHRP(char)
@@ -1065,6 +1046,31 @@ local function getClosestSeekerDistance()
 		end
 	end
 	return closest
+end
+
+local function tempDisableAutoTaunt()
+	if not atEnabled then return end
+	atEnabled = false
+	setToggleVisual(PaintAndSeek.ATBtn, false)
+	local btn = findTauntButton()
+	if btn then
+		pcall(function()
+			btn.MouseButton1Up:Fire()
+		end)
+	end
+end
+
+local function fullDisableAutoTaunt()
+	if not atEnabled and not atUserEnabled then return end
+	atEnabled = false
+	atUserEnabled = false
+	setToggleVisual(PaintAndSeek.ATBtn, false)
+	local btn = findTauntButton()
+	if btn then
+		pcall(function()
+			btn.MouseButton1Up:Fire()
+		end)
+	end
 end
 
 task.spawn(function()
@@ -1090,11 +1096,12 @@ task.spawn(function()
 			local dist = getClosestSeekerDistance()
 			if dist <= SEEKER_SAFE_DISTANCE then
 				if atEnabled then
-					disableAutoTaunt()
+					tempDisableAutoTaunt()
 				end
 			else
 				if not atEnabled then
-					enableAutoTauntIfUserWants()
+					atEnabled = true
+					setToggleVisual(PaintAndSeek.ATBtn, true)
 				end
 			end
 		end
@@ -1107,7 +1114,7 @@ local function watchDeath(char)
 	if not hum then return end
 
 	hum.Died:Connect(function()
-		disableAutoTaunt()
+		fullDisableAutoTaunt()
 	end)
 end
 
@@ -1126,7 +1133,7 @@ task.spawn(function()
 		task.wait(0.2)
 		local isSeekerNow = isPlayerSeeker(player)
 		if isSeekerNow and not wasSeeker then
-			disableAutoTaunt()
+			fullDisableAutoTaunt()
 		end
 		wasSeeker = isSeekerNow
 	end
@@ -1279,6 +1286,6 @@ if PaintAndSeek.IconImage then
 end
 
 task.wait(0.5)
-showNotify("ZepHub", "Добро пожаловать!", 4)
+showNotify("ZepHub", "Добро пожаловать!", 5)
 
 print("ZepHub Paint and Seek loaded")
