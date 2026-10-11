@@ -46,6 +46,10 @@ local PaintAndSeek = {
 	OpenBtn = Instance.new("ImageButton"),
 	UIStroke = Instance.new("UIStroke"),
 	UICorner_18 = Instance.new("UICorner"),
+	Notify = Instance.new("ImageLabel"),
+	UIStroke_2 = Instance.new("UIStroke"),
+	Title_Notify_ = Instance.new("TextLabel"),
+	Subtitle_Notify_ = Instance.new("TextLabel"),
 }
 
 PaintAndSeek.PaintAndSeek.Parent = game:GetService("CoreGui")
@@ -95,6 +99,10 @@ PaintAndSeek.NickLabel.Parent = PaintAndSeek.background
 PaintAndSeek.OpenBtn.Parent = PaintAndSeek.PaintAndSeek
 PaintAndSeek.UIStroke.Parent = PaintAndSeek.OpenBtn
 PaintAndSeek.UICorner_18.Parent = PaintAndSeek.OpenBtn
+PaintAndSeek.Notify.Parent = PaintAndSeek.PaintAndSeek
+PaintAndSeek.UIStroke_2.Parent = PaintAndSeek.Notify
+PaintAndSeek.Title_Notify_.Parent = PaintAndSeek.Notify
+PaintAndSeek.Subtitle_Notify_.Parent = PaintAndSeek.Notify
 
 PaintAndSeek.PaintAndSeek.Name = "PaintAndSeek"
 PaintAndSeek.PaintAndSeek.ResetOnSpawn = false
@@ -249,8 +257,8 @@ PaintAndSeek.UICorner_4.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.ESPBtn.Name = "ESPBtn"
 PaintAndSeek.ESPBtn.ZIndex = 1
-PaintAndSeek.ESPBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
-PaintAndSeek.ESPBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
+PaintAndSeek.ESPBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
+PaintAndSeek.ESPBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
 PaintAndSeek.ESPBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 PaintAndSeek.ESPBtn.BackgroundTransparency = 0
 PaintAndSeek.ESPBtn.Text = "OFF"
@@ -380,8 +388,8 @@ PaintAndSeek.UICorner_8.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.GPPBtn.Name = "GPPBtn"
 PaintAndSeek.GPPBtn.ZIndex = 1
-PaintAndSeek.GPPBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
-PaintAndSeek.GPPBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
+PaintAndSeek.GPPBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
+PaintAndSeek.GPPBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
 PaintAndSeek.GPPBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 PaintAndSeek.GPPBtn.BackgroundTransparency = 0
 PaintAndSeek.GPPBtn.Text = "OFF"
@@ -497,8 +505,8 @@ PaintAndSeek.UICorner_12.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.Speed50Btn.Name = "Speed50Btn"
 PaintAndSeek.Speed50Btn.ZIndex = 1
-PaintAndSeek.Speed50Btn.Position = UDim2.new(0.791006744, 0, 0, 0)
-PaintAndSeek.Speed50Btn.Size = UDim2.new(0.208993182, 0, 1, 0)
+PaintAndSeek.Speed50Btn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
+PaintAndSeek.Speed50Btn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
 PaintAndSeek.Speed50Btn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 PaintAndSeek.Speed50Btn.BackgroundTransparency = 0
 PaintAndSeek.Speed50Btn.Text = "OFF"
@@ -569,8 +577,8 @@ PaintAndSeek.UICorner_15.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.ATBtn.Name = "ATBtn"
 PaintAndSeek.ATBtn.ZIndex = 1
-PaintAndSeek.ATBtn.Position = UDim2.new(0.791006744, 0, 0, 0)
-PaintAndSeek.ATBtn.Size = UDim2.new(0.208993182, 0, 1, 0)
+PaintAndSeek.ATBtn.Position = UDim2.new(0.791006744, 0, 1.00000036, 0)
+PaintAndSeek.ATBtn.Size = UDim2.new(0.208993182, 0, -1.00662899, 0)
 PaintAndSeek.ATBtn.BackgroundColor3 = Color3.fromRGB(255,0,0)
 PaintAndSeek.ATBtn.BackgroundTransparency = 0
 PaintAndSeek.ATBtn.Text = "OFF"
@@ -675,10 +683,75 @@ PaintAndSeek.UIStroke.Enabled = true
 PaintAndSeek.UICorner_18.Name = "UICorner"
 PaintAndSeek.UICorner_18.CornerRadius = UDim.new(0, 8)
 
+PaintAndSeek.Notify.Name = "Notify"
+PaintAndSeek.Notify.ZIndex = 1
+PaintAndSeek.Notify.Position = UDim2.new(0.850826025, 0, 0.762309015, 0)
+PaintAndSeek.Notify.Size = UDim2.new(0.153511018, 0, 0.145840392, 0)
+PaintAndSeek.Notify.BackgroundColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.Notify.BackgroundTransparency = 0
+PaintAndSeek.Notify.Image = ""
+PaintAndSeek.Notify.ScaleType = Enum.ScaleType.Stretch
+PaintAndSeek.Notify.ImageColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.Notify.ImageTransparency = 0
+PaintAndSeek.Notify.Visible = true
+PaintAndSeek.Notify.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.Notify.ClipsDescendants = false
+
+PaintAndSeek.UIStroke_2.Name = "UIStroke"
+PaintAndSeek.UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+PaintAndSeek.UIStroke_2.Color = Color3.fromRGB(255,255,255)
+PaintAndSeek.UIStroke_2.LineJoinMode = Enum.LineJoinMode.Round
+PaintAndSeek.UIStroke_2.Thickness = 2
+PaintAndSeek.UIStroke_2.Transparency = 0
+PaintAndSeek.UIStroke_2.Enabled = true
+
+PaintAndSeek.Title_Notify_.Name = "Title(Notify)"
+PaintAndSeek.Title_Notify_.ZIndex = 1
+PaintAndSeek.Title_Notify_.Position = UDim2.new(-7.17032719e-07, 0, 0, 0)
+PaintAndSeek.Title_Notify_.Size = UDim2.new(0.971747458, 0, 0.323282897, 0)
+PaintAndSeek.Title_Notify_.BackgroundColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.Title_Notify_.BackgroundTransparency = 1
+PaintAndSeek.Title_Notify_.Text = "(ТУТ ДЛЖНО БЫЬ НАЗВАНИЕ ЧТО БУДЕТ ПОКАЗЫВАТЬ ЭТОТ ЛЕЙБЛ"
+PaintAndSeek.Title_Notify_.TextScaled = true
+PaintAndSeek.Title_Notify_.TextSize = 14
+PaintAndSeek.Title_Notify_.Font = Enum.Font.FredokaOne
+PaintAndSeek.Title_Notify_.TextColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.Title_Notify_.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.Title_Notify_.TextStrokeTransparency = 1
+PaintAndSeek.Title_Notify_.TextWrapped = true
+PaintAndSeek.Title_Notify_.TextXAlignment = Enum.TextXAlignment.Center
+PaintAndSeek.Title_Notify_.TextYAlignment = Enum.TextYAlignment.Center
+PaintAndSeek.Title_Notify_.TextTransparency = 0
+PaintAndSeek.Title_Notify_.Visible = true
+PaintAndSeek.Title_Notify_.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.Title_Notify_.ClipsDescendants = false
+
+PaintAndSeek.Subtitle_Notify_.Name = "Subtitle(Notify)"
+PaintAndSeek.Subtitle_Notify_.ZIndex = 1
+PaintAndSeek.Subtitle_Notify_.Position = UDim2.new(-5.84698e-07, 0, 0.325960785, 0)
+PaintAndSeek.Subtitle_Notify_.Size = UDim2.new(0.971747458, 0, 0.674039125, 0)
+PaintAndSeek.Subtitle_Notify_.BackgroundColor3 = Color3.fromRGB(255,255,255)
+PaintAndSeek.Subtitle_Notify_.BackgroundTransparency = 1
+PaintAndSeek.Subtitle_Notify_.Text = "Пример (ZepHub активирован!"
+PaintAndSeek.Subtitle_Notify_.TextScaled = true
+PaintAndSeek.Subtitle_Notify_.TextSize = 14
+PaintAndSeek.Subtitle_Notify_.Font = Enum.Font.FredokaOne
+PaintAndSeek.Subtitle_Notify_.TextColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.Subtitle_Notify_.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+PaintAndSeek.Subtitle_Notify_.TextStrokeTransparency = 1
+PaintAndSeek.Subtitle_Notify_.TextWrapped = true
+PaintAndSeek.Subtitle_Notify_.TextXAlignment = Enum.TextXAlignment.Center
+PaintAndSeek.Subtitle_Notify_.TextYAlignment = Enum.TextYAlignment.Center
+PaintAndSeek.Subtitle_Notify_.TextTransparency = 0
+PaintAndSeek.Subtitle_Notify_.Visible = true
+PaintAndSeek.Subtitle_Notify_.AnchorPoint = Vector2.new(0, 0)
+PaintAndSeek.Subtitle_Notify_.ClipsDescendants = false
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local GuiService = game:GetService("GuiService")
+local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
@@ -712,6 +785,39 @@ local function isPlayerSeeker(plr)
 		end
 	end
 	return false
+end
+
+PaintAndSeek.Notify.Visible = false
+PaintAndSeek.Notify.Position = UDim2.new(1, 400, 0.762309015, 0)
+
+local notifyOriginalPos = UDim2.new(0.850826025, 0, 0.762309015, 0)
+
+local function showNotify(titleText, subtitleText, duration)
+	duration = duration or 3
+
+	PaintAndSeek.Title_Notify_.Text = titleText or ""
+	PaintAndSeek.Subtitle_Notify_.Text = subtitleText or ""
+
+	PaintAndSeek.Notify.Visible = true
+	PaintAndSeek.Notify.Position = UDim2.new(1, 400, notifyOriginalPos.Y.Scale, notifyOriginalPos.Y.Offset)
+
+	local inTween = TweenService:Create(
+		PaintAndSeek.Notify,
+		TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+		{ Position = notifyOriginalPos }
+	)
+	inTween:Play()
+
+	task.delay(duration, function()
+		local outTween = TweenService:Create(
+			PaintAndSeek.Notify,
+			TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
+			{ Position = UDim2.new(1, 400, notifyOriginalPos.Y.Scale, notifyOriginalPos.Y.Offset) }
+		)
+		outTween:Play()
+		outTween.Completed:Wait()
+		PaintAndSeek.Notify.Visible = false
+	end)
 end
 
 local function createESPForPlayer(plr)
@@ -922,7 +1028,7 @@ local function pressButton(btn)
 	return ok
 end
 
-local function disableAutoTaunt(reason)
+local function disableAutoTaunt()
 	if not atEnabled then return end
 	atEnabled = false
 	setToggleVisual(PaintAndSeek.ATBtn, false)
@@ -944,6 +1050,7 @@ task.spawn(function()
 				local btn = findTauntButton()
 				if btn and btn.Visible then
 					pressButton(btn)
+					showNotify("Auto-Taunt", "Таунт нажат", 2)
 				end
 			end
 		end
@@ -956,7 +1063,7 @@ local function watchDeath(char)
 	if not hum then return end
 
 	hum.Died:Connect(function()
-		disableAutoTaunt("died")
+		disableAutoTaunt()
 	end)
 end
 
@@ -975,7 +1082,7 @@ task.spawn(function()
 		task.wait(0.2)
 		local isSeekerNow = isPlayerSeeker(player)
 		if isSeekerNow and not wasSeeker then
-			disableAutoTaunt("becameSeeker")
+			disableAutoTaunt()
 		end
 		wasSeeker = isSeekerNow
 	end
@@ -989,10 +1096,35 @@ task.spawn(function()
 			if char then
 				local hum = char:FindFirstChildOfClass("Humanoid")
 				if hum and hum.Health < hum.MaxHealth * 0.6 then
-					disableAutoTaunt("lowHP")
+					disableAutoTaunt()
 				end
 			end
 		end
+	end
+end)
+
+task.spawn(function()
+	local gradient = PaintAndSeek.UIStroke_2:FindFirstChildOfClass("UIGradient")
+	if gradient then
+		while gradient and gradient.Parent do
+			gradient.Offset = Vector2.new(-1, 0)
+			local tween = TweenService:Create(
+				gradient,
+				TweenInfo.new(3, Enum.EasingStyle.Linear, Enum.EasingDirection.Linear),
+				{ Offset = Vector2.new(1, 0) }
+			)
+			tween:Play()
+			tween.Completed:Wait()
+		end
+	end
+end)
+
+task.spawn(function()
+	local hue = 0
+	while PaintAndSeek.Notify and PaintAndSeek.Notify.Parent do
+		hue = (hue + 0.003) % 1
+		PaintAndSeek.Notify.BackgroundColor3 = Color3.fromHSV(hue, 0.7, 1)
+		task.wait(0.03)
 	end
 end)
 
@@ -1021,12 +1153,14 @@ PaintAndSeek.ESPBtn.MouseButton1Click:Connect(function()
 	espEnabled = not espEnabled
 	setToggleVisual(PaintAndSeek.ESPBtn, espEnabled)
 	if not espEnabled then clearAllESP() end
+	showNotify("ESP players", espEnabled and "Включен" or "Выключен")
 end)
 
 PaintAndSeek.GPPBtn.MouseButton1Click:Connect(function()
 	gppEnabled = not gppEnabled
 	setToggleVisual(PaintAndSeek.GPPBtn, gppEnabled)
 	if not gppEnabled then removeAllGPP() end
+	showNotify("GPP", gppEnabled and "Включен" or "Выключен")
 end)
 
 PaintAndSeek.Speed50Btn.MouseButton1Click:Connect(function()
@@ -1039,11 +1173,13 @@ PaintAndSeek.Speed50Btn.MouseButton1Click:Connect(function()
 			if hum then hum.WalkSpeed = 16 end
 		end
 	end
+	showNotify("Speed 50", speedEnabled and "Включен" or "Выключен")
 end)
 
 PaintAndSeek.ATBtn.MouseButton1Click:Connect(function()
 	atEnabled = not atEnabled
 	setToggleVisual(PaintAndSeek.ATBtn, atEnabled)
+	showNotify("Auto-Taunt", atEnabled and "Включен" or "Выключен")
 end)
 
 local dragging, dragStart, startPos
@@ -1077,6 +1213,32 @@ UserInputService.InputEnded:Connect(function(input)
 	end
 end)
 
+local openDrag, openDragStart, openStartPos
+
+PaintAndSeek.OpenBtn.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		openDrag = true
+		openDragStart = input.Position
+		openStartPos = PaintAndSeek.OpenBtn.Position
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if openDrag and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - openDragStart
+		PaintAndSeek.OpenBtn.Position = UDim2.new(
+			openStartPos.X.Scale, openStartPos.X.Offset + delta.X,
+			openStartPos.Y.Scale, openStartPos.Y.Offset + delta.Y
+		)
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		openDrag = false
+	end
+end)
+
 if PaintAndSeek.NickLabel then
 	PaintAndSeek.NickLabel.Text = "@" .. player.Name
 end
@@ -1085,5 +1247,8 @@ if PaintAndSeek.IconImage then
 	PaintAndSeek.IconImage.Image = "rbxthumb://type=AvatarHeadShot&id=" .. player.UserId .. "&w=150&h=150"
 	PaintAndSeek.IconImage.ImageTransparency = 0
 end
+
+task.wait(0.5)
+showNotify("ZepHub", "Добро пожаловать!", 4)
 
 print("ZepHub Paint and Seek loaded")
