@@ -83,7 +83,7 @@ PaintAndSeek.SFKBtnSelect.Parent = PaintAndSeek.SFKBackground
 PaintAndSeek.UICorner_7.Parent = PaintAndSeek.SFKBtnSelect
 PaintAndSeek.SFKLabel.Parent = PaintAndSeek.SFKBackground
 PaintAndSeek.UICorner_8.Parent = PaintAndSeek.SFKLabel
-PaintAndSeek.ScrollingKnifes.Parent = PaintAndSeek.SFKBackground
+PaintAndSeek.ScrollingKnifes.Parent = PaintAndSeek.background
 PaintAndSeek.UICorner_9.Parent = PaintAndSeek.ScrollingKnifes
 PaintAndSeek.UIStroke.Parent = PaintAndSeek.ScrollingKnifes
 PaintAndSeek.OpenVisualScroll.Parent = PaintAndSeek.background
@@ -137,7 +137,7 @@ PaintAndSeek.background.Image = "rbxassetid://7388383866"
 PaintAndSeek.background.ScaleType = Enum.ScaleType.Stretch
 PaintAndSeek.background.ImageColor3 = Color3.fromRGB(255,255,255)
 PaintAndSeek.background.ImageTransparency = 0.5099999904632568
-PaintAndSeek.background.Visible = true
+PaintAndSeek.background.Visible = false
 PaintAndSeek.background.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.background.ClipsDescendants = false
 
@@ -391,17 +391,20 @@ PaintAndSeek.UICorner_8.Name = "UICorner"
 PaintAndSeek.UICorner_8.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.ScrollingKnifes.Name = "ScrollingKnifes"
-PaintAndSeek.ScrollingKnifes.ZIndex = 1
+PaintAndSeek.ScrollingKnifes.ZIndex = 50
 PaintAndSeek.ScrollingKnifes.Position = UDim2.new(0.514200449, 0, 1.25476348, 0)
 PaintAndSeek.ScrollingKnifes.Size = UDim2.new(0.485508114, 0, 4.12679625, 0)
-PaintAndSeek.ScrollingKnifes.BackgroundColor3 = Color3.fromRGB(47,41,38)
-PaintAndSeek.ScrollingKnifes.BackgroundTransparency = 0.44999998807907104
+PaintAndSeek.ScrollingKnifes.BackgroundColor3 = Color3.fromRGB(8, 8, 12)
+PaintAndSeek.ScrollingKnifes.BackgroundTransparency = 0
 PaintAndSeek.ScrollingKnifes.Visible = false
 PaintAndSeek.ScrollingKnifes.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.ScrollingKnifes.ClipsDescendants = true
-PaintAndSeek.ScrollingKnifes.CanvasSize = UDim2.new(0, 0, 12, 0)
-PaintAndSeek.ScrollingKnifes.ScrollBarThickness = 0
+PaintAndSeek.ScrollingKnifes.CanvasSize = UDim2.new(0, 0, 0, 0)
+PaintAndSeek.ScrollingKnifes.AutomaticCanvasSize = Enum.AutomaticSize.Y
+PaintAndSeek.ScrollingKnifes.ScrollBarThickness = 8
+PaintAndSeek.ScrollingKnifes.ScrollBarImageColor3 = Color3.fromRGB(0, 255, 150)
 PaintAndSeek.ScrollingKnifes.ScrollingEnabled = true
+PaintAndSeek.ScrollingKnifes.Active = true
 PaintAndSeek.ScrollingKnifes.BorderSizePixel = 0
 
 PaintAndSeek.UICorner_9.Name = "UICorner"
@@ -409,9 +412,9 @@ PaintAndSeek.UICorner_9.CornerRadius = UDim.new(0, 8)
 
 PaintAndSeek.UIStroke.Name = "UIStroke"
 PaintAndSeek.UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
-PaintAndSeek.UIStroke.Color = Color3.fromRGB(0,0,0)
+PaintAndSeek.UIStroke.Color = Color3.fromRGB(0, 255, 150)
 PaintAndSeek.UIStroke.LineJoinMode = Enum.LineJoinMode.Round
-PaintAndSeek.UIStroke.Thickness = 1.5
+PaintAndSeek.UIStroke.Thickness = 2.5
 PaintAndSeek.UIStroke.Transparency = 0
 PaintAndSeek.UIStroke.Enabled = true
 
@@ -862,13 +865,14 @@ PaintAndSeek.Subtitle_Notify_.Visible = true
 PaintAndSeek.Subtitle_Notify_.AnchorPoint = Vector2.new(0, 0)
 PaintAndSeek.Subtitle_Notify_.ClipsDescendants = false
 
+-- ====== ЛОГИКА ======
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local GuiService = game:GetService("GuiService")
 local TweenService = game:GetService("TweenService")
-local player = Players.LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
 
 local BTN_ON_COLOR = Color3.fromRGB(0, 200, 0)
 local BTN_OFF_COLOR = Color3.fromRGB(255, 0, 0)
@@ -911,32 +915,21 @@ local notifyOriginalPos = UDim2.new(0.850826025, 0, 0.762309015, 0)
 
 local function showNotify(titleText, subtitleText, duration)
 	duration = duration or 5
-
 	PaintAndSeek.Title_Notify_.Text = titleText or ""
 	PaintAndSeek.Subtitle_Notify_.Text = subtitleText or ""
-
 	PaintAndSeek.Notify.Visible = true
 	PaintAndSeek.Notify.Position = UDim2.new(1, 400, notifyOriginalPos.Y.Scale, notifyOriginalPos.Y.Offset)
-
-	local inTween = TweenService:Create(
-		PaintAndSeek.Notify,
-		TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
-		{ Position = notifyOriginalPos }
-	)
+	local inTween = TweenService:Create(PaintAndSeek.Notify, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {Position = notifyOriginalPos})
 	inTween:Play()
-
 	task.delay(duration, function()
-		local outTween = TweenService:Create(
-			PaintAndSeek.Notify,
-			TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In),
-			{ Position = UDim2.new(1, 400, notifyOriginalPos.Y.Scale, notifyOriginalPos.Y.Offset) }
-		)
+		local outTween = TweenService:Create(PaintAndSeek.Notify, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {Position = UDim2.new(1, 400, notifyOriginalPos.Y.Scale, notifyOriginalPos.Y.Offset)})
 		outTween:Play()
 		outTween.Completed:Wait()
 		PaintAndSeek.Notify.Visible = false
 	end)
 end
 
+-- ===== ESP =====
 local function createESPForPlayer(plr)
 	if not plr.Character or espCache[plr] then return end
 	local char = plr.Character
@@ -949,18 +942,15 @@ local function createESPForPlayer(plr)
 	highlight.FillColor = Color3.fromRGB(255, 0, 255)
 	highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
 	highlight.Parent = char
-
 	local hrp = char:FindFirstChild("HumanoidRootPart") or char:FindFirstChildWhichIsA("BasePart")
 	local billboard, label
 	if hrp then
 		billboard = Instance.new("BillboardGui")
-		billboard.Name = "ZepHub_ESPLabel"
 		billboard.Size = UDim2.fromScale(6, 1.4)
 		billboard.StudsOffset = Vector3.new(0, 3, 0)
 		billboard.AlwaysOnTop = true
 		billboard.Adornee = hrp
 		billboard.Parent = hrp
-
 		label = Instance.new("TextLabel")
 		label.Size = UDim2.fromScale(1, 1)
 		label.BackgroundTransparency = 1
@@ -972,9 +962,7 @@ local function createESPForPlayer(plr)
 		label.TextColor3 = Color3.fromRGB(255, 255, 255)
 		label.Parent = billboard
 	end
-
 	espCache[plr] = {highlight = highlight, billboard = billboard, label = label, hrp = hrp, hue = math.random()}
-
 	task.spawn(function()
 		while espCache[plr] and espEnabled do
 			local data = espCache[plr]
@@ -1006,14 +994,10 @@ task.spawn(function()
 		task.wait(0.5)
 		if espEnabled then
 			for _, plr in ipairs(Players:GetPlayers()) do
-				if plr ~= player and plr.Character then
-					createESPForPlayer(plr)
-				end
+				if plr ~= player and plr.Character then createESPForPlayer(plr) end
 			end
 			for plr, data in pairs(espCache) do
-				if not plr.Parent or not plr.Character or not data.hrp or not data.hrp.Parent then
-					removeESPForPlayer(plr)
-				end
+				if not plr.Parent or not plr.Character or not data.hrp or not data.hrp.Parent then removeESPForPlayer(plr) end
 			end
 		end
 	end
@@ -1037,16 +1021,12 @@ task.spawn(function()
 	end
 end)
 
+-- ===== GPP =====
 local function createProximityPromptForTarget(targetPlr)
 	if not targetPlr.Character then return end
 	local hrp = targetPlr.Character:FindFirstChild("HumanoidRootPart")
 	if not hrp then return end
-
-	if GPP_PROMPTS[targetPlr] then
-		GPP_PROMPTS[targetPlr]:Destroy()
-		GPP_PROMPTS[targetPlr] = nil
-	end
-
+	if GPP_PROMPTS[targetPlr] then GPP_PROMPTS[targetPlr]:Destroy() GPP_PROMPTS[targetPlr] = nil end
 	local prompt = Instance.new("ProximityPrompt")
 	prompt.ActionText = "Teleport to " .. targetPlr.Name
 	prompt.ObjectText = "🎨 Hider"
@@ -1054,19 +1034,15 @@ local function createProximityPromptForTarget(targetPlr)
 	prompt.RequiresLineOfSight = false
 	prompt.HoldDuration = 0
 	prompt.Parent = hrp
-
 	prompt.Triggered:Connect(function(triggeredBy)
 		if triggeredBy ~= player then return end
 		local myChar = player.Character
 		local myHrp = getHRP(myChar)
 		if myHrp and targetPlr.Character then
 			local targetHrp = getHRP(targetPlr.Character)
-			if targetHrp then
-				myHrp.CFrame = CFrame.new(targetHrp.Position + Vector3.new(0, 2, 0))
-			end
+			if targetHrp then myHrp.CFrame = CFrame.new(targetHrp.Position + Vector3.new(0, 2, 0)) end
 		end
 	end)
-
 	GPP_PROMPTS[targetPlr] = prompt
 end
 
@@ -1094,6 +1070,7 @@ task.spawn(function()
 	end
 end)
 
+-- ===== SPEED 50 =====
 task.spawn(function()
 	while true do
 		task.wait(0.5)
@@ -1101,14 +1078,13 @@ task.spawn(function()
 			local char = player.Character
 			if char then
 				local hum = char:FindFirstChildOfClass("Humanoid")
-				if hum then
-					hum.WalkSpeed = 50
-				end
+				if hum then hum.WalkSpeed = 50 end
 			end
 		end
 	end
 end)
 
+-- ===== AUTO-TAUNT =====
 local AT_COOLDOWN = 5.1
 local lastAT = 0
 local SEEKER_SAFE_DISTANCE = 7
@@ -1117,9 +1093,7 @@ local function findTauntButton()
 	local pg = player:FindFirstChild("PlayerGui")
 	if not pg then return nil end
 	for _, obj in ipairs(pg:GetDescendants()) do
-		if obj.Name == "TauntButton" and (obj:IsA("TextButton") or obj:IsA("ImageButton")) then
-			return obj
-		end
+		if obj.Name == "TauntButton" and (obj:IsA("TextButton") or obj:IsA("ImageButton")) then return obj end
 	end
 	return nil
 end
@@ -1132,9 +1106,7 @@ local function pressButton(btn)
 		btn.MouseButton1Click:Fire()
 	end)
 	if ok then return true end
-	ok = pcall(function()
-		btn.Activated:Fire()
-	end)
+	ok = pcall(function() btn.Activated:Fire() end)
 	if ok then return true end
 	ok = pcall(function()
 		local guiInset = GuiService:GetGuiInset()
@@ -1150,7 +1122,6 @@ local function getClosestSeekerDistance()
 	local char = player.Character
 	local myHrp = getHRP(char)
 	if not myHrp then return math.huge end
-
 	local closest = math.huge
 	for _, plr in ipairs(Players:GetPlayers()) do
 		if plr ~= player and plr.Character and isPlayerSeeker(plr) then
@@ -1169,11 +1140,7 @@ local function tempDisableAutoTaunt()
 	atEnabled = false
 	setToggleVisual(PaintAndSeek.ATBtn, false)
 	local btn = findTauntButton()
-	if btn then
-		pcall(function()
-			btn.MouseButton1Up:Fire()
-		end)
-	end
+	if btn then pcall(function() btn.MouseButton1Up:Fire() end) end
 end
 
 local function fullDisableAutoTaunt()
@@ -1182,11 +1149,7 @@ local function fullDisableAutoTaunt()
 	atUserEnabled = false
 	setToggleVisual(PaintAndSeek.ATBtn, false)
 	local btn = findTauntButton()
-	if btn then
-		pcall(function()
-			btn.MouseButton1Up:Fire()
-		end)
-	end
+	if btn then pcall(function() btn.MouseButton1Up:Fire() end) end
 end
 
 task.spawn(function()
@@ -1197,9 +1160,7 @@ task.spawn(function()
 			if now - lastAT >= AT_COOLDOWN then
 				lastAT = now
 				local btn = findTauntButton()
-				if btn and btn.Visible then
-					pressButton(btn)
-				end
+				if btn and btn.Visible then pressButton(btn) end
 			end
 		end
 	end
@@ -1211,9 +1172,7 @@ task.spawn(function()
 		if atUserEnabled and not isPlayerSeeker(player) then
 			local dist = getClosestSeekerDistance()
 			if dist <= SEEKER_SAFE_DISTANCE then
-				if atEnabled then
-					tempDisableAutoTaunt()
-				end
+				if atEnabled then tempDisableAutoTaunt() end
 			else
 				if not atEnabled then
 					atEnabled = true
@@ -1228,16 +1187,10 @@ local function watchDeath(char)
 	if not char then return end
 	local hum = char:FindFirstChildOfClass("Humanoid")
 	if not hum then return end
-
-	hum.Died:Connect(function()
-		fullDisableAutoTaunt()
-	end)
+	hum.Died:Connect(function() fullDisableAutoTaunt() end)
 end
 
-if player.Character then
-	watchDeath(player.Character)
-end
-
+if player.Character then watchDeath(player.Character) end
 player.CharacterAdded:Connect(function(char)
 	task.wait(0.5)
 	watchDeath(char)
@@ -1248,31 +1201,13 @@ task.spawn(function()
 	while true do
 		task.wait(0.2)
 		local isSeekerNow = isPlayerSeeker(player)
-		if isSeekerNow and not wasSeeker then
-			fullDisableAutoTaunt()
-		end
+		if isSeekerNow and not wasSeeker then fullDisableAutoTaunt() end
 		wasSeeker = isSeekerNow
 	end
 end)
 
-task.spawn(function()
-	local gradient = PaintAndSeek.UIStroke_2:FindFirstChildOfClass("UIGradient")
-	if gradient then
-		while gradient and gradient.Parent do
-			gradient.Rotation = (gradient.Rotation + 5) % 360
-			task.wait(0.02)
-		end
-	end
-end)
-
-task.spawn(function()
-	local hue = 0
-	while PaintAndSeek.Notify and PaintAndSeek.Notify.Parent do
-		hue = (hue + 0.009) % 1
-		PaintAndSeek.Notify.BackgroundColor3 = Color3.fromHSV(hue, 0.7, 1)
-		task.wait(0.02)
-	end
-end)
+-- ===== ОТКРЫТИЕ/ЗАКРЫТИЕ ПАНЕЛИ =====
+PaintAndSeek.background.Visible = false
 
 PaintAndSeek.OpenBtn.MouseButton1Click:Connect(function()
 	PaintAndSeek.background.Visible = not PaintAndSeek.background.Visible
@@ -1280,6 +1215,7 @@ end)
 
 PaintAndSeek.CloseBtn.MouseButton1Click:Connect(function()
 	PaintAndSeek.background.Visible = false
+	PaintAndSeek.ScrollingKnifes.Visible = false
 end)
 
 PaintAndSeek.OpenVisualScroll.MouseButton1Click:Connect(function()
@@ -1291,9 +1227,6 @@ PaintAndSeek.OpenMainScroll.MouseButton1Click:Connect(function()
 	PaintAndSeek.MainScroll.Visible = true
 	PaintAndSeek.VisualScroll.Visible = false
 end)
-
-PaintAndSeek.VisualScroll.Visible = true
-PaintAndSeek.MainScroll.Visible = false
 
 PaintAndSeek.ESPBtn.MouseButton1Click:Connect(function()
 	espEnabled = not espEnabled
@@ -1335,73 +1268,7 @@ PaintAndSeek.ATBtn.MouseButton1Click:Connect(function()
 	end
 end)
 
-local dragging, dragStart, startPos
-
-PaintAndSeek.background.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		local mousePos = UserInputService:GetMouseLocation()
-		local topLeft = PaintAndSeek.background.AbsolutePosition
-		local offsetY = mousePos.Y - topLeft.Y
-		if offsetY <= PaintAndSeek.background.AbsoluteSize.Y * 0.15 then
-			dragging = true
-			dragStart = input.Position
-			startPos = PaintAndSeek.background.Position
-		end
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-		local delta = input.Position - dragStart
-		PaintAndSeek.background.Position = UDim2.new(
-			startPos.X.Scale, startPos.X.Offset + delta.X,
-			startPos.Y.Scale, startPos.Y.Offset + delta.Y
-		)
-	end
-end)
-
-UserInputService.InputEnded:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = false
-	end
-end)
-
-local openDrag, openDragStart, openStartPos
-
-PaintAndSeek.OpenBtn.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		openDrag = true
-		openDragStart = input.Position
-		openStartPos = PaintAndSeek.OpenBtn.Position
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if openDrag and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-		local delta = input.Position - openDragStart
-		PaintAndSeek.OpenBtn.Position = UDim2.new(
-			openStartPos.X.Scale, openStartPos.X.Offset + delta.X,
-			openStartPos.Y.Scale, openStartPos.Y.Offset + delta.Y
-		)
-	end
-end)
-
-UserInputService.InputEnded:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		openDrag = false
-	end
-end)
-
-if PaintAndSeek.NickLabel then
-	PaintAndSeek.NickLabel.Text = "@" .. player.Name
-end
-
-if PaintAndSeek.IconImage then
-	PaintAndSeek.IconImage.Image = "rbxthumb://type=AvatarHeadShot&id=" .. player.UserId .. "&w=150&h=150"
-	PaintAndSeek.IconImage.ImageTransparency = 0
-end
-
--- ====== ЗАПОЛНЕНИЕ ScrollingKnifes ======
+-- ===== ЗАПОЛНЕНИЕ ScrollingKnifes =====
 local WORKING_SKINS = {
 	"BaseballKnife", "BasketballKnife", "CarnotaurHornKnife",
 	"DarkroseBlade", "DilophosaurFrillKnife", "DinoEggBladeKnife",
@@ -1414,18 +1281,8 @@ local WORKING_SKINS = {
 
 local KnifeSkins = ReplicatedStorage:FindFirstChild("KnifeSkins")
 
-PaintAndSeek.ScrollingKnifes.Visible = false
-PaintAndSeek.ScrollingKnifes.CanvasSize = UDim2.new(0, 0, 0, 0)
-PaintAndSeek.ScrollingKnifes.AutomaticCanvasSize = Enum.AutomaticSize.Y
-PaintAndSeek.ScrollingKnifes.ScrollBarThickness = 6
-PaintAndSeek.ScrollingKnifes.ScrollBarImageColor3 = Color3.fromRGB(0, 255, 150)
-PaintAndSeek.ScrollingKnifes.BackgroundTransparency = 0.2
-PaintAndSeek.ScrollingKnifes.ZIndex = 10
-
 for _, ch in ipairs(PaintAndSeek.ScrollingKnifes:GetChildren()) do
-	if ch:IsA("TextButton") or ch:IsA("UIListLayout") or ch:IsA("UIPadding") then
-		ch:Destroy()
-	end
+	if ch:IsA("TextButton") or ch:IsA("UIListLayout") or ch:IsA("UIPadding") then ch:Destroy() end
 end
 
 local knifesLayout = Instance.new("UIListLayout")
@@ -1447,9 +1304,7 @@ local customKnivesList = {}
 local selectListOpen = false
 
 local function clearCustomKnives()
-	for _, k in ipairs(customKnivesList) do
-		pcall(function() k:Destroy() end)
-	end
+	for _, k in ipairs(customKnivesList) do pcall(function() k:Destroy() end) end
 	customKnivesList = {}
 	local char = player.Character
 	if char then
@@ -1463,41 +1318,19 @@ end
 
 local function applyKnifeSkin(skinModel, skinName, silent)
 	local char = player.Character
-	if not char then
-		if not silent then showNotify("❌", "Нет персонажа") end
-		return
-	end
-
+	if not char then return end
 	local upperTorso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso")
-	if not upperTorso then
-		if not silent then showNotify("❌", "Нет UpperTorso") end
-		return
-	end
-
+	if not upperTorso then return end
 	clearCustomKnives()
-
 	local handle = skinModel:FindFirstChild("Handle")
-	if not handle then
-		if not silent then showNotify("❌", "Handle не найден") end
-		return
-	end
-
+	if not handle then return end
 	local partsToCopy = {}
 	local handleMesh = handle:FindFirstChildOfClass("SpecialMesh")
-	if handleMesh then
-		table.insert(partsToCopy, {type = "special", sourcePart = handle, sourceMesh = handleMesh})
-	end
+	if handleMesh then table.insert(partsToCopy, {type = "special", sourcePart = handle, sourceMesh = handleMesh}) end
 	for _, obj in ipairs(handle:GetChildren()) do
-		if obj:IsA("MeshPart") then
-			table.insert(partsToCopy, {type = "meshpart", sourcePart = obj})
-		end
+		if obj:IsA("MeshPart") then table.insert(partsToCopy, {type = "meshpart", sourcePart = obj}) end
 	end
-
-	if #partsToCopy == 0 then
-		if not silent then showNotify("❌", "Нет частей") end
-		return
-	end
-
+	if #partsToCopy == 0 then return end
 	local mainPart = partsToCopy[1].sourcePart
 	local maxSize = 0
 	for _, item in ipairs(partsToCopy) do
@@ -1505,11 +1338,7 @@ local function applyKnifeSkin(skinModel, skinName, silent)
 		local sz = p.Size.X * p.Size.Y * p.Size.Z
 		if sz > maxSize then maxSize = sz mainPart = p end
 	end
-
-	local backCFrame = upperTorso.CFrame 
-		* CFrame.new(0, 0, 0.8) 
-		* CFrame.Angles(math.rad(90), math.rad(45), math.rad(90))
-
+	local backCFrame = upperTorso.CFrame * CFrame.new(0, 0, 0.8) * CFrame.Angles(math.rad(90), math.rad(45), math.rad(90))
 	for _, item in ipairs(partsToCopy) do
 		local srcPart = item.sourcePart
 		local newPart = Instance.new("Part")
@@ -1523,10 +1352,8 @@ local function applyKnifeSkin(skinModel, skinName, silent)
 		newPart.CanTouch = false
 		newPart.CanQuery = false
 		newPart.Massless = true
-
 		local relativeCFrame = mainPart.CFrame:ToObjectSpace(srcPart.CFrame)
 		newPart.CFrame = backCFrame * relativeCFrame
-
 		if item.type == "special" and item.sourceMesh then
 			local newMesh = Instance.new("SpecialMesh")
 			newMesh.MeshId = item.sourceMesh.MeshId
@@ -1542,45 +1369,43 @@ local function applyKnifeSkin(skinModel, skinName, silent)
 			newMesh.TextureId = srcPart.TextureID
 			newMesh.Parent = newPart
 		end
-
 		newPart.Parent = char
-
 		local weld = Instance.new("Weld")
 		weld.Part0 = upperTorso
 		weld.Part1 = newPart
 		weld.C0 = upperTorso.CFrame:Inverse() * newPart.CFrame
 		weld.Parent = newPart
-
 		table.insert(customKnivesList, newPart)
 	end
-
 	if not silent then
-		showNotify("🔪 " .. skinName, "Скин применён", 2)
+		showNotify("🔪 " .. skinName, "Скин применён", 3)
 	end
 end
 
 local function setSelectButtonState(isSelected)
 	if isSelected then
 		PaintAndSeek.SFKBtnSelect.Text = "Selected"
-		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(0, 180, 80)
+		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(0, 220, 80)
 	else
 		PaintAndSeek.SFKBtnSelect.Text = "Select"
-		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+		PaintAndSeek.SFKBtnSelect.BackgroundColor3 = Color3.fromRGB(255, 30, 30)
 	end
 end
 
 for i, skinName in ipairs(WORKING_SKINS) do
 	local skinModel = KnifeSkins and KnifeSkins:FindFirstChild(skinName)
-
 	local btn = Instance.new("TextButton")
 	btn.Name = "Skin_" .. skinName
-	btn.Size = UDim2.new(1, 0, 0, 40)
-	btn.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
-	btn.BackgroundTransparency = 0.1
+	btn.Size = UDim2.new(1, 0, 0, 42)
+	btn.BackgroundColor3 = Color3.fromRGB(70, 70, 100)
+	btn.BackgroundTransparency = 0
 	btn.BorderSizePixel = 0
 	btn.Text = ""
 	btn.AutoButtonColor = false
 	btn.LayoutOrder = i
+	btn.ZIndex = 51
+	btn.Active = true
+	btn.Selectable = true
 	btn.Parent = PaintAndSeek.ScrollingKnifes
 
 	local btnCorner = Instance.new("UICorner")
@@ -1588,9 +1413,9 @@ for i, skinName in ipairs(WORKING_SKINS) do
 	btnCorner.Parent = btn
 
 	local btnStroke = Instance.new("UIStroke")
-	btnStroke.Thickness = 1.5
-	btnStroke.Color = Color3.fromRGB(80, 80, 120)
-	btnStroke.Transparency = 0.4
+	btnStroke.Thickness = 2
+	btnStroke.Color = Color3.fromRGB(170, 170, 240)
+	btnStroke.Transparency = 0
 	btnStroke.Parent = btn
 
 	local iconLbl = Instance.new("TextLabel")
@@ -1598,9 +1423,10 @@ for i, skinName in ipairs(WORKING_SKINS) do
 	iconLbl.Position = UDim2.new(0, 6, 0, 0)
 	iconLbl.BackgroundTransparency = 1
 	iconLbl.Text = "🔪"
-	iconLbl.TextColor3 = Color3.fromRGB(255, 200, 100)
+	iconLbl.TextColor3 = Color3.fromRGB(255, 220, 100)
 	iconLbl.TextScaled = true
 	iconLbl.Font = Enum.Font.FredokaOne
+	iconLbl.ZIndex = 52
 	iconLbl.Parent = btn
 
 	local nameLbl = Instance.new("TextLabel")
@@ -1613,62 +1439,39 @@ for i, skinName in ipairs(WORKING_SKINS) do
 	nameLbl.TextScaled = true
 	nameLbl.Font = Enum.Font.FredokaOne
 	nameLbl.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-	nameLbl.TextStrokeTransparency = 0.5
+	nameLbl.TextStrokeTransparency = 0.2
+	nameLbl.ZIndex = 52
 	nameLbl.Parent = btn
 
 	btn.MouseEnter:Connect(function()
 		if selectedSkinBtn ~= btn then
-			TweenService:Create(btn, TweenInfo.new(0.15), {
-				BackgroundColor3 = Color3.fromRGB(50, 50, 70),
-				BackgroundTransparency = 0,
-			}):Play()
+			TweenService:Create(btn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(110, 110, 160)}):Play()
 		end
 	end)
-
 	btn.MouseLeave:Connect(function()
 		if selectedSkinBtn ~= btn then
-			TweenService:Create(btn, TweenInfo.new(0.15), {
-				BackgroundColor3 = Color3.fromRGB(35, 35, 50),
-				BackgroundTransparency = 0.1,
-			}):Play()
+			TweenService:Create(btn, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(70, 70, 100)}):Play()
 		end
 	end)
 
 	btn.MouseButton1Click:Connect(function()
 		if not skinModel then
-			showNotify("❌", "Скин не найден")
+			showNotify("❌", "Скин не найден", 3)
 			return
 		end
-
 		if selectedSkinBtn and selectedSkinBtn ~= btn then
-			TweenService:Create(selectedSkinBtn, TweenInfo.new(0.2), {
-				BackgroundColor3 = Color3.fromRGB(35, 35, 50),
-				BackgroundTransparency = 0.1,
-			}):Play()
+			TweenService:Create(selectedSkinBtn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(70, 70, 100)}):Play()
 			local prevStroke = selectedSkinBtn:FindFirstChildOfClass("UIStroke")
 			if prevStroke then
-				TweenService:Create(prevStroke, TweenInfo.new(0.2), {
-					Color = Color3.fromRGB(80, 80, 120),
-					Transparency = 0.4,
-				}):Play()
+				TweenService:Create(prevStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(170, 170, 240)}):Play()
 			end
 		end
-
-		TweenService:Create(btn, TweenInfo.new(0.2), {
-			BackgroundColor3 = Color3.fromRGB(0, 180, 80),
-			BackgroundTransparency = 0.1,
-		}):Play()
-		TweenService:Create(btnStroke, TweenInfo.new(0.2), {
-			Color = Color3.fromRGB(0, 255, 150),
-			Transparency = 0,
-		}):Play()
-
+		TweenService:Create(btn, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(0, 220, 80)}):Play()
+		TweenService:Create(btnStroke, TweenInfo.new(0.2), {Color = Color3.fromRGB(0, 255, 150)}):Play()
 		selectedSkinBtn = btn
 		selectedSkinName = skinName
 		selectedSkinModel = skinModel
-
 		applyKnifeSkin(skinModel, skinName)
-
 		PaintAndSeek.ScrollingKnifes.Visible = false
 		selectListOpen = false
 		setSelectButtonState(true)
@@ -1686,6 +1489,21 @@ PaintAndSeek.SFKBtnSelect.MouseButton1Click:Connect(function()
 	end
 end)
 
+UserInputService.InputBegan:Connect(function(input, gp)
+	if gp then return end
+	if not selectListOpen then return end
+	if input.UserInputType ~= Enum.UserInputType.MouseButton1
+	and input.UserInputType ~= Enum.UserInputType.Touch then return end
+	local pos = input.Position
+	local scrollPos = PaintAndSeek.ScrollingKnifes.AbsolutePosition
+	local scrollSize = PaintAndSeek.ScrollingKnifes.AbsoluteSize
+	if pos.X < scrollPos.X or pos.X > scrollPos.X + scrollSize.X
+	or pos.Y < scrollPos.Y or pos.Y > scrollPos.Y + scrollSize.Y then
+		PaintAndSeek.ScrollingKnifes.Visible = false
+		selectListOpen = false
+	end
+end)
+
 task.spawn(function()
 	while true do
 		task.wait(1)
@@ -1699,14 +1517,12 @@ task.spawn(function()
 						break
 					end
 				end
-
 				local customCount = 0
 				for _, obj in ipairs(char:GetChildren()) do
 					if obj.Name:lower():find("zepknife") then
 						customCount = customCount + 1
 					end
 				end
-
 				if hasBackKnife or customCount == 0 then
 					applyKnifeSkin(selectedSkinModel, selectedSkinName, true)
 				end
@@ -1714,6 +1530,31 @@ task.spawn(function()
 		end
 	end
 end)
+
+-- Драг OpenBtn
+local openDrag, openDragStart, openStartPos
+PaintAndSeek.OpenBtn.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		openDrag = true
+		openDragStart = input.Position
+		openStartPos = PaintAndSeek.OpenBtn.Position
+	end
+end)
+UserInputService.InputChanged:Connect(function(input)
+	if openDrag and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - openDragStart
+		PaintAndSeek.OpenBtn.Position = UDim2.new(openStartPos.X.Scale, openStartPos.X.Offset + delta.X, openStartPos.Y.Scale, openStartPos.Y.Offset + delta.Y)
+	end
+end)
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then openDrag = false end
+end)
+
+if PaintAndSeek.NickLabel then PaintAndSeek.NickLabel.Text = "@" .. player.Name end
+if PaintAndSeek.IconImage then
+	PaintAndSeek.IconImage.Image = "rbxthumb://type=AvatarHeadShot&id=" .. player.UserId .. "&w=150&h=150"
+	PaintAndSeek.IconImage.ImageTransparency = 0
+end
 
 task.wait(0.5)
 showNotify("ZepHub", "Добро пожаловать!", 5)
