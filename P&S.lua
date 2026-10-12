@@ -83,7 +83,7 @@ PaintAndSeek.SFKBtnSelect.Parent = PaintAndSeek.SFKBackground
 PaintAndSeek.UICorner_7.Parent = PaintAndSeek.SFKBtnSelect
 PaintAndSeek.SFKLabel.Parent = PaintAndSeek.SFKBackground
 PaintAndSeek.UICorner_8.Parent = PaintAndSeek.SFKLabel
-PaintAndSeek.ScrollingKnifes.Parent = PaintAndSeek.background
+PaintAndSeek.ScrollingKnifes.Parent = PaintAndSeek.SFKBackground
 PaintAndSeek.UICorner_9.Parent = PaintAndSeek.ScrollingKnifes
 PaintAndSeek.UIStroke.Parent = PaintAndSeek.ScrollingKnifes
 PaintAndSeek.OpenVisualScroll.Parent = PaintAndSeek.background
@@ -1531,7 +1531,6 @@ task.spawn(function()
 	end
 end)
 
--- Драг OpenBtn
 local openDrag, openDragStart, openStartPos
 PaintAndSeek.OpenBtn.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
